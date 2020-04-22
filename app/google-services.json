@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "980451025576",
+    "firebase_url": "https://la-jauja.firebaseio.com",
+    "project_id": "la-jauja",
+    "storage_bucket": "la-jauja.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980451025576:android:f44755f66016f7cb1e589d",
+        "android_client_info": {
+          "package_name": "com.dybcatering.lajauja"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980451025576-idttge5l6s42dar7c72dt3e92hkg61ra.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl_dhLyvKgl4aoVPTyBqfmRIz7yKZnQCk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980451025576-idttge5l6s42dar7c72dt3e92hkg61ra.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
