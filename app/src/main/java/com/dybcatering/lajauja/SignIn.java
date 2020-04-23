@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.dybcatering.lajauja.Common.Common;
 import com.dybcatering.lajauja.Model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -56,8 +57,10 @@ public class SignIn extends AppCompatActivity {
                             User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
                             if (user.getPassword().equals(edtPassword.getText().toString())) {
                                 Intent intent = new Intent(SignIn.this, Home.class);
+                                Common.currentUser = user;
                                 startActivity(intent);
-                                Toast.makeText(SignIn.this, "Inicio de sesion exitoso", Toast.LENGTH_SHORT).show();
+                                finish();
+
                             } else {
                                 Toast.makeText(SignIn.this, "No se pudo iniciar sesión", Toast.LENGTH_SHORT).show();
                             }
