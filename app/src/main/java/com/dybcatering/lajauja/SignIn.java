@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -54,6 +55,8 @@ public class SignIn extends AppCompatActivity {
                             mDialog.dismiss();
                             User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
                             if (user.getPassword().equals(edtPassword.getText().toString())) {
+                                Intent intent = new Intent(SignIn.this, Home.class);
+                                startActivity(intent);
                                 Toast.makeText(SignIn.this, "Inicio de sesion exitoso", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(SignIn.this, "No se pudo iniciar sesión", Toast.LENGTH_SHORT).show();
