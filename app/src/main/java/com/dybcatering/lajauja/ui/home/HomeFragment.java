@@ -1,21 +1,17 @@
 package com.dybcatering.lajauja.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dybcatering.lajauja.Home;
+import com.dybcatering.lajauja.FoodList;
 import com.dybcatering.lajauja.Interface.ItemOnclickListener;
 import com.dybcatering.lajauja.Model.Category;
 import com.dybcatering.lajauja.R;
@@ -32,8 +28,14 @@ public class HomeFragment extends Fragment {
 
     FirebaseDatabase database;
     DatabaseReference category;
- RecyclerView recyclerView_menu;
+    RecyclerView recyclerView_menu;
     RecyclerView.LayoutManager layoutManager;
+    FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter;
+
+   // public HomeFragment(FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter) {
+     //   this.adapter = adapter;
+   // }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         //homeViewModel =                ViewModelProviders.of(this).get(HomeViewModel.class);
@@ -63,7 +65,7 @@ public class HomeFragment extends Fragment {
 
 
     private void loadMenu() {
-        FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(Category.class, R.layout.menu_item, MenuViewHolder.class, category) {
+         adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(Category.class, R.layout.menu_item, MenuViewHolder.class, category) {
 
             @Override
             protected void populateViewHolder(MenuViewHolder menuViewHolder, Category category, int i) {
@@ -75,7 +77,10 @@ public class HomeFragment extends Fragment {
                 menuViewHolder.setItemClickListener(new ItemOnclickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(getActivity(), ""+clickitem.getName(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), ""+clickitem.getName(), Toast.LENGTH_SHORT).show();
+                        Intent foodList = new Intent(getActivity(), FoodList.class);
+                        foodList.putExtra("CategoryId", adapter.getRef(position).getKey());
+                        startActivity(foodList);
                     }
                 });
             }
