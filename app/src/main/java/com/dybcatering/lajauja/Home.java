@@ -62,6 +62,14 @@ public class Home extends AppCompatActivity {
                 Intent cartIntent = new Intent(Home.this, Cart.class);
                 startActivity(cartIntent);
 
+
+
+
+
+
+
+
+
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

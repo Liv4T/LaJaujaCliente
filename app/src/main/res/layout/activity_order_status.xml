@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".ui.gallery.GalleryFragment">
-
+    tools:context=".OrderStatus">
+    
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listOrders"
         android:background="@android:color/transparent"
