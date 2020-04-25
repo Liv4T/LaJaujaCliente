@@ -1,38 +1,58 @@
 package com.dybcatering.lajauja.ui.gallery;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dybcatering.lajauja.Cart;
 import com.dybcatering.lajauja.Common.Common;
+import com.dybcatering.lajauja.Database.Database;
+import com.dybcatering.lajauja.Model.Order;
 import com.dybcatering.lajauja.Model.Request;
 import com.dybcatering.lajauja.R;
+import com.dybcatering.lajauja.ViewHolder.CartAdapter;
 import com.dybcatering.lajauja.ViewHolder.OrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import info.hoang8f.widget.FButton;
+
 public class GalleryFragment extends Fragment {
 
-    public RecyclerView recyclerView;
-    public RecyclerView.LayoutManager layoutManager;
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
 
     FirebaseDatabase database;
     DatabaseReference requests;
 
-    FirebaseRecyclerAdapter<Request, OrderViewHolder> adapter;
+    TextView txtTotalPrice;
+    FButton btnPlace;
+
+    List<Order> cart = new ArrayList<>();
+
+    CartAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,44 +63,80 @@ public class GalleryFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         requests = database.getReference("Request");
 
-        recyclerView = root.findViewById(R.id.listOrders);
+        recyclerView = root.findViewById(R.id.listCart);
         recyclerView.setHasFixedSize(true);
-        layoutManager =  new LinearLayoutManager(getContext());
+        layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        loadOrders(Common.currentUser.getPhone());
+        txtTotalPrice = root.findViewById(R.id.total);
+        btnPlace = root.findViewById(R.id.btnPlaceOrder);
 
+        btnPlace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlertDialog();
+            }
+        });
+
+        loadListFood();
         return root;
     }
 
-    private void loadOrders(String phone) {
-        adapter = new FirebaseRecyclerAdapter<Request, OrderViewHolder>(
-                Request.class,
-                R.layout.order_layout,
-                OrderViewHolder.class,
-                requests.orderByChild("phone")
-                        .equalTo(phone)
-        ) {
-            @Override
-            protected void populateViewHolder(OrderViewHolder orderViewHolder, Request request, int i) {
-                orderViewHolder.txtOrderId.setText(adapter.getRef(i).getKey());
-                orderViewHolder.txtOrderStatus.setText(convertCodeToStatus(request.getStatus()));
-                orderViewHolder.txtOrderAddress.setText(request.getAddress());
-                orderViewHolder.txtOrderPhone.setText(request.getPhone());
+    private void showAlertDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        alertDialog.setTitle("Un paso más");
+        alertDialog.setMessage("Ingresa la Dirección de Entrega");
 
+        final EditText edtAdress = new EditText(getContext());
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+        );
+        edtAdress.setLayoutParams(lp);
+        alertDialog.setView(edtAdress);
+        alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
+
+        alertDialog.setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Request request = new Request(
+                        Common.currentUser.getPhone(),
+                        Common.currentUser.getName(),
+                        edtAdress.getText().toString(),
+                        txtTotalPrice.getText().toString(),
+                        cart
+                );
+
+                requests.child(String.valueOf(System.currentTimeMillis()))
+                        .setValue(request);
+
+                new Database(getContext().getApplicationContext()).cleanCart();
+                Toast.makeText(getContext(), "Gracias, la orden ha sido recibida", Toast.LENGTH_SHORT).show();
+                getActivity().finish();
             }
-        };
-        recyclerView.setAdapter(adapter);
+        });
+        alertDialog.setNegativeButton("CANCELAR", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        alertDialog.show();
     }
 
-    private String convertCodeToStatus(String key) {
-        if (key.equals("0"))
-            return "Recibido";
-        else if (key.equals("1"))
-            return "En Camino";
-        else
-            return "Entregado !";
+    private void loadListFood() {
+        cart = new Database(getContext()).getCarts();
+        adapter = new CartAdapter(cart, getContext());
+        recyclerView.setAdapter(adapter);
 
+        int total = 0;
+        for (Order order:cart)
+            total+=(Integer.parseInt(order.getPrice()))*(Integer.parseInt(order.getQuantity()));
+        Locale locale = new Locale("en", "US");
+        NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
+
+        txtTotalPrice.setText(fmt.format(total));
     }
 
 }

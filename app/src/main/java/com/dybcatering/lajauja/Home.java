@@ -62,14 +62,6 @@ public class Home extends AppCompatActivity {
                 Intent cartIntent = new Intent(Home.this, Cart.class);
                 startActivity(cartIntent);
 
-
-
-
-
-
-
-
-
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -102,6 +94,9 @@ public class Home extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
+//        Intent signIn = new Intent(Home.this, SignIn.class);
+  //      signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    //    startActivity(signIn);
         return true;
     }
 
