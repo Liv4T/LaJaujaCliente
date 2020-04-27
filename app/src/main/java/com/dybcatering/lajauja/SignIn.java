@@ -46,7 +46,7 @@ public class SignIn extends AppCompatActivity {
                 mDialog.show();
 
 
-                table_user.addValueEventListener(new ValueEventListener() {
+                table_user.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

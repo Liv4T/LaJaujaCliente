@@ -45,7 +45,7 @@ public class SignUp extends AppCompatActivity {
                 mDialog.setMessage("Por favor espere un momento");
                 mDialog.show();
 
-                table_user.addValueEventListener(new ValueEventListener() {
+                table_user.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
