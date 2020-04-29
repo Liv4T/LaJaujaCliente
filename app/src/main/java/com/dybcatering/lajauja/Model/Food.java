@@ -2,65 +2,64 @@ package com.dybcatering.lajauja.Model;
 
 public class Food {
 
-    private String Image,Food,Price,Discount, Description, MenuId;
-
+    private String image, food, price, discount, description, menuId;
     public Food() {
     }
 
     public Food(String image, String food, String price, String discount, String description, String menuId) {
-        Image = image;
-        Food = food;
-        Price = price;
-        Discount = discount;
-        Description = description;
-        MenuId = menuId;
+        this.image = image;
+        this.food = food;
+        this.price = price;
+        this.discount = discount;
+        this.description = description;
+        this.menuId = menuId;
     }
 
     public String getImage() {
-        return Image;
+        return image;
     }
 
     public void setImage(String image) {
-        Image = image;
+        this.image = image;
     }
 
     public String getFood() {
-        return Food;
+        return food;
     }
 
     public void setFood(String food) {
-        Food = food;
+        this.food = food;
     }
 
     public String getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(String price) {
-        Price = price;
+        this.price = price;
     }
 
     public String getDiscount() {
-        return Discount;
+        return discount;
     }
 
     public void setDiscount(String discount) {
-        Discount = discount;
+        this.discount = discount;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public String getMenuId() {
-        return MenuId;
+        return menuId;
     }
 
     public void setMenuId(String menuId) {
-        MenuId = menuId;
+        this.menuId = menuId;
     }
 }
