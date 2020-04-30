@@ -14,6 +14,8 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import static com.dybcatering.lajauja.Common.Common.convertCodeToStatus;
+
 public class OrderStatus extends AppCompatActivity {
 
 
@@ -30,14 +32,18 @@ public class OrderStatus extends AppCompatActivity {
         setContentView(R.layout.activity_order_status);
 
         database = FirebaseDatabase.getInstance();
-        requests = database.getReference("Requests");
+        requests = database.getReference("Request");
 
         recyclerView = findViewById(R.id.listOrders);
         recyclerView.setHasFixedSize(true);
         layoutManager =  new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        if (getIntent().getExtras() == null)
         loadOrders(Common.currentUser.getPhone());
+        else {
+            loadOrders(getIntent().getStringExtra("userPhone"));
+        }
     }
 
     private void loadOrders(String phone) {
@@ -51,7 +57,7 @@ public class OrderStatus extends AppCompatActivity {
             @Override
             protected void populateViewHolder(OrderViewHolder orderViewHolder, Request request, int i) {
                     orderViewHolder.txtOrderId.setText(adapter.getRef(i).getKey());
-                    orderViewHolder.txtOrderStatus.setText(convertCodeToStatus(request.getStatus()));
+                    orderViewHolder.txtOrderStatus.setText(Common.convertCodeToStatus(request.getStatus()));
                     orderViewHolder.txtOrderAddress.setText(request.getAddress());
                     orderViewHolder.txtOrderPhone.setText(request.getPhone());
 
@@ -60,13 +66,5 @@ public class OrderStatus extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private String convertCodeToStatus(String key) {
-        if (key.equals("0"))
-            return "Recibido";
-        else if (key.equals("1"))
-            return "En Camino";
-        else
-            return "Entregado !";
 
-    }
 }

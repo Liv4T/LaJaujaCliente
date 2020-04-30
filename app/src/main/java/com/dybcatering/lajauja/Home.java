@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.dybcatering.lajauja.Common.Common;
 import com.dybcatering.lajauja.Interface.ItemOnclickListener;
 import com.dybcatering.lajauja.Model.Category;
+import com.dybcatering.lajauja.Service.ListenOrder;
 import com.dybcatering.lajauja.ViewHolder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -86,6 +87,9 @@ public class Home extends AppCompatActivity {
        // recyclerView_menu.setHasFixedSize(true);
        // layoutManager = new LinearLayoutManager(this);
        // recyclerView_menu.setLayoutManager(layoutManager);
+
+        Intent service = new Intent(Home.this, ListenOrder.class);
+        startService(service);
     }
 
 

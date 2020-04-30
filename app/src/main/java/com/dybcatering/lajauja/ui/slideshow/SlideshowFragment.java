@@ -44,6 +44,7 @@ public class SlideshowFragment extends Fragment {
         layoutManager =  new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
+
         loadOrders(Common.currentUser.getPhone());
 
 
