@@ -3,6 +3,7 @@ package com.dybcatering.lajauja.ui.gallery;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -74,7 +75,11 @@ public class GalleryFragment extends Fragment {
         btnPlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAlertDialog();
+                if (cart.size() > 0)
+                    showAlertDialog();
+                else
+                    Toast.makeText(getContext(), "Tu carrito esta vacio", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -124,10 +129,10 @@ public class GalleryFragment extends Fragment {
 
         alertDialog.show();
     }
-
     private void loadListFood() {
         cart = new Database(getContext()).getCarts();
         adapter = new CartAdapter(cart, getContext());
+        adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
 
         int total = 0;
@@ -137,6 +142,24 @@ public class GalleryFragment extends Fragment {
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
 
         txtTotalPrice.setText(fmt.format(total));
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        if (item.getTitle().equals(Common.DELETE))
+            deleteCart(item.getOrder());
+        return true;
+    }
+
+    private void deleteCart(int order) {
+        cart.remove(order);
+        new Database(getContext()).cleanCart();
+
+        for (Order item:cart)
+            new Database(getContext()).addToCart(item);
+
+        loadListFood();
+
     }
 
 }

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.dybcatering.lajauja.Common.Common;
 import com.dybcatering.lajauja.Interface.ItemOnclickListener;
 import com.dybcatering.lajauja.Model.Category;
 import com.dybcatering.lajauja.Model.Food;
@@ -64,7 +65,14 @@ public class FoodList extends AppCompatActivity {
         if (getIntent() != null)
             CategoryId = getIntent().getStringExtra("CategoryId");
         if (!CategoryId.isEmpty() && CategoryId != null){
+            if (Common.IsConnectedToInternet(this)){
                 loadListFood(CategoryId);
+            }else{
+                Toast.makeText(FoodList.this, "Por favor revisa tu conexión a internet", Toast.LENGTH_SHORT).show();
+
+            }
+
+
         }
 
         materialSearchBar = findViewById(R.id.searchBar);

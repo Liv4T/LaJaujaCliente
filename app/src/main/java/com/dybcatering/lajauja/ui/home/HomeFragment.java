@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dybcatering.lajauja.Common.Common;
 import com.dybcatering.lajauja.FoodList;
 import com.dybcatering.lajauja.Interface.ItemOnclickListener;
 import com.dybcatering.lajauja.Model.Category;
@@ -42,8 +44,7 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
 
-
-        database= FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
         category = database.getReference("Category");
 
         recyclerView_menu = root.findViewById(R.id.recycler_menu);
@@ -51,7 +52,12 @@ public class HomeFragment extends Fragment {
         recyclerView_menu.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView_menu.setLayoutManager(layoutManager);
-        loadMenu();
+//        if (Common.IsConnectedToInternet(getContext())){
+            loadMenu();
+  //      }else{
+    //            Toast.makeText(getContext(), "Por favor revisa tu conexión a internet", Toast.LENGTH_SHORT).show();
+
+      //      }
 
         // final TextView textView = root.findViewById(R.id.text_home);
         //homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
