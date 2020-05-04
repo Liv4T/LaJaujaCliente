@@ -60,4 +60,8 @@ dependencies {
 
     implementation 'com.github.mancj:MaterialSearchBar:0.7.1'
 
+    implementation 'io.paperdb:paperdb:2.1'
+    implementation 'com.github.rey5137:material:1.2.4'
+
+
 }

@@ -33,6 +33,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import io.paperdb.Paper;
+
 public class Home extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -99,6 +101,8 @@ public class Home extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
+  //      Paper.init(Home.this);
+    //    Paper.book().destroy();
 //        Intent signIn = new Intent(Home.this, SignIn.class);
   //      signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     //    startActivity(signIn);
@@ -110,4 +114,5 @@ public class Home extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
 }
