@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.dybcatering.lajauja.Common.Common;
+import com.dybcatering.lajauja.Database.Database;
 import com.dybcatering.lajauja.Interface.ItemOnclickListener;
 import com.dybcatering.lajauja.Model.Category;
 import com.dybcatering.lajauja.Model.Food;
@@ -48,6 +49,8 @@ public class FoodList extends AppCompatActivity {
     List<String> suggestList = new ArrayList<>();
     MaterialSearchBar materialSearchBar;
 
+    Database localDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,8 @@ public class FoodList extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
 
         foodList = database.getReference("Foods");
+
+        localDB = new Database(this);
         recyclerView = findViewById(R.id.recycler_food);
         recyclerView.setHasFixedSize(true);
 
@@ -131,7 +136,7 @@ public class FoodList extends AppCompatActivity {
                 foodList.orderByChild("Food").equalTo(text.toString())
         ) {
             @Override
-            protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
+            protected void populateViewHolder(final FoodViewHolder foodViewHolder, final Food food, final int i) {
                 foodViewHolder.food_name.setText(food.getFood());
                 Picasso.with(getBaseContext()).load(food.getImage())
                         .into(foodViewHolder.food_image);
@@ -173,10 +178,29 @@ public class FoodList extends AppCompatActivity {
     private void loadListFood(String categoryId) {
     adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(Food.class, R.layout.food_item, FoodViewHolder.class, foodList.orderByChild("menuId").equalTo(CategoryId)) {
         @Override
-        protected void populateViewHolder(FoodViewHolder foodViewHolder, Food food, int i) {
+        protected void populateViewHolder(final FoodViewHolder foodViewHolder, final Food food, final int i) {
             foodViewHolder.food_name.setText(food.getFood());
             Picasso.with(getBaseContext()).load(food.getImage())
                     .into(foodViewHolder.food_image);
+
+            if (localDB.isFavorite(adapter.getRef(i).getKey()))
+                foodViewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
+
+            foodViewHolder.fav_image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!localDB.isFavorite(adapter.getRef(i).getKey())){
+                        localDB.addToFavorites(adapter.getRef(i).getKey());
+                        foodViewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
+                        Toast.makeText(FoodList.this, ""+food.getFood()+" fue añadido a favoritos", Toast.LENGTH_SHORT).show();
+                    }else{
+                        localDB.removeFromFavorites(adapter.getRef(i).getKey());
+                        foodViewHolder.fav_image.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                        Toast.makeText(FoodList.this, ""+food.getFood()+" fue eliminado de los favoritos", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
 
             final Food local  = food;
             foodViewHolder.setItemClickListener(new ItemOnclickListener() {

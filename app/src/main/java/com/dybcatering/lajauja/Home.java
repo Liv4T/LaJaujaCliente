@@ -82,7 +82,9 @@ public class Home extends AppCompatActivity {
 
         View headerView = navigationView.getHeaderView(0);
         txtFull = headerView.findViewById(R.id.txtFull);
-        txtFull.setText(Common.currentUser.getName());
+        Paper.init(Home.this);
+        String user = Paper.book().read(Common.USER_KEY);
+        txtFull.setText(user);
 
 
      //   recyclerView_menu = findViewById(R.id.recycler_menu);
@@ -91,8 +93,8 @@ public class Home extends AppCompatActivity {
        // layoutManager = new LinearLayoutManager(this);
        // recyclerView_menu.setLayoutManager(layoutManager);
 
-        Intent service = new Intent(Home.this, ListenOrder.class);
-        startService(service);
+      //  Intent service = new Intent(Home.this, ListenOrder.class);
+       // startService(service);
     }
 
 
