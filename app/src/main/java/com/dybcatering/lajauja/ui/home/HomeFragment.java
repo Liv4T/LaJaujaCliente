@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,8 +51,10 @@ public class HomeFragment extends Fragment {
         recyclerView_menu = root.findViewById(R.id.recycler_menu);
 
         recyclerView_menu.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getContext());
-        recyclerView_menu.setLayoutManager(layoutManager);
+        //layoutManager = new LinearLayoutManager(this);
+        //recyclerView.setLayoutManager(layoutManager);
+
+        recyclerView_menu.setLayoutManager(new GridLayoutManager(getContext(), 2));
 //        if (Common.IsConnectedToInternet(getContext())){
             loadMenu();
   //      }else{

@@ -2,6 +2,7 @@ package com.dybcatering.lajauja;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -64,9 +65,10 @@ public class FoodList extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_food);
         recyclerView.setHasFixedSize(true);
 
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        //layoutManager = new LinearLayoutManager(this);
+        //recyclerView.setLayoutManager(layoutManager);
 
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         if (getIntent() != null)
             CategoryId = getIntent().getStringExtra("CategoryId");
         if (!CategoryId.isEmpty() && CategoryId != null){
@@ -182,7 +184,7 @@ public class FoodList extends AppCompatActivity {
             foodViewHolder.food_name.setText(food.getFood());
             Picasso.with(getBaseContext()).load(food.getImage())
                     .into(foodViewHolder.food_image);
-
+  /*
             if (localDB.isFavorite(adapter.getRef(i).getKey()))
                 foodViewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
 
@@ -200,7 +202,7 @@ public class FoodList extends AppCompatActivity {
                     }
                 }
             });
-
+*/
 
             final Food local  = food;
             foodViewHolder.setItemClickListener(new ItemOnclickListener() {

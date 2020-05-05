@@ -65,5 +65,6 @@ dependencies {
 
     implementation 'com.stepstone.apprating:app-rating:2.0.0'
 
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
 }
