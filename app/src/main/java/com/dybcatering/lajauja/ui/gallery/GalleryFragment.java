@@ -32,6 +32,7 @@ import com.dybcatering.lajauja.ViewHolder.OrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -92,13 +93,12 @@ public class GalleryFragment extends Fragment {
         alertDialog.setTitle("Un paso más");
         alertDialog.setMessage("Ingresa la Dirección de Entrega");
 
-        final EditText edtAdress = new EditText(getContext());
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-        );
-        edtAdress.setLayoutParams(lp);
-        alertDialog.setView(edtAdress);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View order_address_comment = inflater.inflate(R.layout.order_adress_comment, null);
+
+        final MaterialEditText edtAdress = order_address_comment.findViewById(R.id.edtAdress);
+        final MaterialEditText edtComment = order_address_comment.findViewById(R.id.edtComment);
+        alertDialog.setView(order_address_comment);
         alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
 
         alertDialog.setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
@@ -109,6 +109,8 @@ public class GalleryFragment extends Fragment {
                         Common.currentUser.getName(),
                         edtAdress.getText().toString(),
                         txtTotalPrice.getText().toString(),
+                        "0",
+                        edtComment.getText().toString(),
                         cart
                 );
 
