@@ -5,6 +5,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.dybcatering.lajauja.Model.User;
+import com.dybcatering.lajauja.Remote.APIService;
+import com.dybcatering.lajauja.Remote.RetrofitClient;
 
 public class Common {
     public static User currentUser;
@@ -12,6 +14,12 @@ public class Common {
     public static final String DELETE = "Eliminar";
     public static final String USER_KEY = "User";
     public static final String PWD_KEY = "Password";
+
+    public static final String BASE_URL = "https://fcm.googleapis.com/";
+
+    public static APIService getFCMService(){
+        return RetrofitClient.getClient(BASE_URL).create(APIService.class);
+    }
 
     public static String convertCodeToStatus(String key) {
         if (key.equals("0"))

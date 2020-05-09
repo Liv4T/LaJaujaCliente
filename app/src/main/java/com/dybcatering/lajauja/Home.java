@@ -2,27 +2,18 @@ package com.dybcatering.lajauja;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
-import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dybcatering.lajauja.Common.Common;
-import com.dybcatering.lajauja.Interface.ItemOnclickListener;
-import com.dybcatering.lajauja.Model.Category;
-import com.dybcatering.lajauja.Service.ListenOrder;
-import com.dybcatering.lajauja.ViewHolder.MenuViewHolder;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.dybcatering.lajauja.Model.Token;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
+import com.google.firebase.iid.FirebaseInstanceId;
 
-import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -30,8 +21,6 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import io.paperdb.Paper;
 
@@ -92,11 +81,15 @@ public class Home extends AppCompatActivity {
        // recyclerView_menu.setHasFixedSize(true);
        // layoutManager = new LinearLayoutManager(this);
        // recyclerView_menu.setLayoutManager(layoutManager);
-
-      //  Intent service = new Intent(Home.this, ListenOrder.class);
-       // startService(service);
+        updateToken(FirebaseInstanceId.getInstance().getToken());
     }
 
+    private void updateToken(String token) {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference tokens = db.getReference("Tokens");
+        Token data = new Token(token, false);
+        tokens.child(Common.currentUser.getPhone()).setValue(data);
+    }
 
 
     @Override
