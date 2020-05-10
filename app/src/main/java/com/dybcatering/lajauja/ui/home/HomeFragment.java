@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dybcatering.lajauja.Common.Common;
 import com.dybcatering.lajauja.FoodList;
@@ -35,6 +36,8 @@ public class HomeFragment extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter;
 
+    SwipeRefreshLayout swipeRefreshLayout;
+
    // public HomeFragment(FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter) {
      //   this.adapter = adapter;
    // }
@@ -44,6 +47,30 @@ public class HomeFragment extends Fragment {
         //homeViewModel =                ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        swipeRefreshLayout =root.findViewById(R.id.swipe_layout);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary),
+                getResources().getColor(android.R.color.holo_green_dark),
+                getResources().getColor(android.R.color.holo_orange_dark),
+                getResources().getColor(android.R.color.holo_blue_dark)
+                );
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+              //  if (Common.IsConnectedToInternet(getContext())){
+                    loadMenu();
+             //   }else{
+              //      Toast.makeText(getContext(), "Por favor revisa tu conexión a internet", Toast.LENGTH_SHORT).show();
+
+             //   }
+            }
+        });
+
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                loadMenu();
+            }
+        });
 
         database = FirebaseDatabase.getInstance();
         category = database.getReference("Category");
@@ -55,12 +82,7 @@ public class HomeFragment extends Fragment {
         //recyclerView.setLayoutManager(layoutManager);
 
         recyclerView_menu.setLayoutManager(new GridLayoutManager(getContext(), 2));
-//        if (Common.IsConnectedToInternet(getContext())){
-            loadMenu();
-  //      }else{
-    //            Toast.makeText(getContext(), "Por favor revisa tu conexión a internet", Toast.LENGTH_SHORT).show();
 
-      //      }
 
         // final TextView textView = root.findViewById(R.id.text_home);
         //homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -95,5 +117,6 @@ public class HomeFragment extends Fragment {
             }
         };
         recyclerView_menu.setAdapter(adapter);
+        swipeRefreshLayout.setRefreshing(false);
     }
 }
