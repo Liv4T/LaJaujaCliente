@@ -1,12 +1,16 @@
 package com.dybcatering.lajauja;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.service.autofill.Dataset;
 import android.util.Log;
@@ -19,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dybcatering.lajauja.Common.Common;
+import com.dybcatering.lajauja.Common.Config;
 import com.dybcatering.lajauja.Database.Database;
 import com.dybcatering.lajauja.Model.MyResponse;
 import com.dybcatering.lajauja.Model.Notification;
@@ -36,8 +41,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +68,7 @@ import retrofit2.Response;
 
 public class Cart extends AppCompatActivity {
 
+    private static final int  PAYPAL_REQUEST_CODE = 9999;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
 
@@ -65,10 +84,20 @@ public class Cart extends AppCompatActivity {
 
    APIService mService;
 
+   static PayPalConfiguration config = new PayPalConfiguration()
+           .environment(PayPalConfiguration.ENVIRONMENT_PRODUCTION) // pruebas y produccion
+           .clientId(Config.PAYPAL_CLIENT_ID);
+
+   String address, comment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
+        Intent intent = new Intent(this, PayPalService.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+        startService(intent);
 
         mService = Common.getFCMService();
 
@@ -114,21 +143,24 @@ public class Cart extends AppCompatActivity {
         alertDialog.setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Request request = new Request(
-                        Common.currentUser.getPhone(),
-                        Common.currentUser.getName(),
-                        edtAdress.getText().toString(),
-                        txtTotalPrice.getText().toString(),
-                        "0",
-                        edtComment.getText().toString(),
-                        cart
-                );
-                String order_number = String.valueOf(System.currentTimeMillis());
-                requests.child(order_number)
-                        .setValue(request);
 
-                new Database(getBaseContext()).cleanCart();
-               sendNotification(order_number);
+                address = edtAdress.getText().toString();
+                comment = edtComment.getText().toString();
+
+
+                String formatAmmount = txtTotalPrice.getText().toString()
+                                        .replace("$", "")
+                                        .replace(",00", "");
+
+                PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmmount),
+                        "USD",
+                        "Orden La Jauja ",
+                        PayPalPayment.PAYMENT_INTENT_SALE);
+                Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);
+                intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+                intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
+                startActivityForResult(intent, PAYPAL_REQUEST_CODE);
+
 
 
             }
@@ -141,6 +173,50 @@ public class Cart extends AppCompatActivity {
         });
 
         alertDialog.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PAYPAL_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+                if (confirmation != null) {
+                    try {
+                        String paymentDetail = confirmation.toJSONObject().toString(4);
+                        JSONObject jsonObject = new JSONObject(paymentDetail);
+
+
+                        Request request = new Request(
+                                Common.currentUser.getPhone(),
+                                Common.currentUser.getName(),
+                                address,
+                                txtTotalPrice.getText().toString(),
+                                "0",
+                                comment,
+                                jsonObject.getJSONObject("response").getString("state"),
+                                cart
+                        );
+                        String order_number = String.valueOf(System.currentTimeMillis());
+                        requests.child(order_number)
+                                .setValue(request);
+
+                        new Database(getBaseContext()).cleanCart();
+                        sendNotification(order_number);
+
+                        Toast.makeText(this, "Gracias, la orden ha sido recibida", Toast.LENGTH_SHORT).show();
+                        finish();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else if (resultCode == Activity.RESULT_CANCELED){
+                Toast.makeText(this, "Pago cancelado", Toast.LENGTH_SHORT).show();
+            } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID){
+                Toast.makeText(this, "Pago Inválido", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void sendNotification(final String order_number) {
@@ -215,4 +291,48 @@ public class Cart extends AppCompatActivity {
         loadListFood();
 
     }
+    public void verileriGetir(View v) {
+
+        DownloadData downloadData = new DownloadData();
+        try {
+
+            String accessKey = "b521f5d6194f3eb09f20c589ab0bdc10";
+            String url = "http://data.fixer.io/api/latest?access_key='" + accessKey + "'";
+            downloadData.execute(url);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private class DownloadData extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String result = "";
+            URL url;
+            HttpURLConnection httpURLConnection;
+
+            try {
+                url = new URL(strings[0]);
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                InputStreamReader reader = new InputStreamReader(inputStream);
+
+                int data = reader.read();
+                while (data > 0) {
+                    char karakter = (char) data;
+                    result += karakter;
+                    data = reader.read();
+                }
+                return result;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
+
+
 }
