@@ -150,7 +150,7 @@ public class Cart extends AppCompatActivity {
 
                 String formatAmmount = txtTotalPrice.getText().toString()
                                         .replace("$", "")
-                                        .replace(",00", "");
+                                        .replace(",", "");
 
                 PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmmount),
                         "USD",
