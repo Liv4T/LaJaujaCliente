@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -75,28 +77,7 @@ public class HomeFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         category = database.getReference("Category");
 
-        recyclerView_menu = root.findViewById(R.id.recycler_menu);
-
-        recyclerView_menu.setHasFixedSize(true);
-        //layoutManager = new LinearLayoutManager(this);
-        //recyclerView.setLayoutManager(layoutManager);
-
-        recyclerView_menu.setLayoutManager(new GridLayoutManager(getContext(), 2));
-
-
-        // final TextView textView = root.findViewById(R.id.text_home);
-        //homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-         //   @Override
-           // public void onChanged(@Nullable String s) {
-             //   textView.setText(s);
-//            }
-  //      });
-        return root;
-    }
-
-
-    private void loadMenu() {
-         adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(Category.class, R.layout.menu_item, MenuViewHolder.class, category) {
+        adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(Category.class, R.layout.menu_item, MenuViewHolder.class, category) {
 
             @Override
             protected void populateViewHolder(MenuViewHolder menuViewHolder, Category category, int i) {
@@ -116,7 +97,27 @@ public class HomeFragment extends Fragment {
                 });
             }
         };
+
+
+        recyclerView_menu = root.findViewById(R.id.recycler_menu);
+        recyclerView_menu.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(recyclerView_menu.getContext(),
+                R.anim.layout_fall_down);
+        recyclerView_menu.setLayoutAnimation(controller);
+
+
+        return root;
+    }
+
+
+    private void loadMenu() {
+
+         adapter.notifyDataSetChanged();
+
         recyclerView_menu.setAdapter(adapter);
         swipeRefreshLayout.setRefreshing(false);
+
+        recyclerView_menu.getAdapter().notifyDataSetChanged();
+        recyclerView_menu.scheduleLayoutAnimation();
     }
 }

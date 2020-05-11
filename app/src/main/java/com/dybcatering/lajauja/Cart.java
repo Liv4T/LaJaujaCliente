@@ -85,7 +85,7 @@ public class Cart extends AppCompatActivity {
    APIService mService;
 
    static PayPalConfiguration config = new PayPalConfiguration()
-           .environment(PayPalConfiguration.ENVIRONMENT_PRODUCTION) // pruebas y produccion
+           .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX) // pruebas SANDBOX y produccion PRODUCTION
            .clientId(Config.PAYPAL_CLIENT_ID);
 
    String address, comment;
@@ -291,48 +291,5 @@ public class Cart extends AppCompatActivity {
         loadListFood();
 
     }
-    public void verileriGetir(View v) {
-
-        DownloadData downloadData = new DownloadData();
-        try {
-
-            String accessKey = "b521f5d6194f3eb09f20c589ab0bdc10";
-            String url = "http://data.fixer.io/api/latest?access_key='" + accessKey + "'";
-            downloadData.execute(url);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private class DownloadData extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... strings) {
-            String result = "";
-            URL url;
-            HttpURLConnection httpURLConnection;
-
-            try {
-                url = new URL(strings[0]);
-                httpURLConnection = (HttpURLConnection) url.openConnection();
-                InputStream inputStream = httpURLConnection.getInputStream();
-                InputStreamReader reader = new InputStreamReader(inputStream);
-
-                int data = reader.read();
-                while (data > 0) {
-                    char karakter = (char) data;
-                    result += karakter;
-                    data = reader.read();
-                }
-                return result;
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-    }
-
 
 }
