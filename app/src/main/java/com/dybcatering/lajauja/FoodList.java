@@ -61,6 +61,17 @@ public class FoodList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_list);
 
+
+        database = FirebaseDatabase.getInstance();
+
+        foodList = database.getReference("Foods");
+
+        localDB = new Database(this);
+        recyclerView = findViewById(R.id.recycler_food);
+        recyclerView.setHasFixedSize(true);
+
+        //layoutManager = new LinearLayoutManager(this);
+        //recyclerView.setLayoutManager(layoutManager);
         swipeRefreshLayout = findViewById(R.id.swipe_layout);
 
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary),
@@ -98,17 +109,6 @@ public class FoodList extends AppCompatActivity {
                 }
             }
         });
-        database = FirebaseDatabase.getInstance();
-
-        foodList = database.getReference("Foods");
-
-        localDB = new Database(this);
-        recyclerView = findViewById(R.id.recycler_food);
-        recyclerView.setHasFixedSize(true);
-
-        //layoutManager = new LinearLayoutManager(this);
-        //recyclerView.setLayoutManager(layoutManager);
-
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
 
@@ -208,7 +208,7 @@ public class FoodList extends AppCompatActivity {
     }
 
     private void loadListFood(String categoryId) {
-    adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(Food.class, R.layout.food_item, FoodViewHolder.class, foodList.orderByChild("menuId").equalTo(CategoryId)) {
+    adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(Food.class, R.layout.food_item, FoodViewHolder.class, foodList.orderByChild("menuId").equalTo(categoryId)) {
         @Override
         protected void populateViewHolder(final FoodViewHolder foodViewHolder, final Food food, final int i) {
             foodViewHolder.food_name.setText(food.getFood());

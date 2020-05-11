@@ -127,7 +127,7 @@ public class GalleryFragment extends Fragment {
             }
         });
 
-        loadListFood();
+        //loadListFood();
         return root;
     }
 
@@ -262,7 +262,7 @@ public class GalleryFragment extends Fragment {
             }
         });
     }
-
+/*
     private void loadListFood() {
         cart = new Database(getContext()).getCarts();
         adapter = new CartAdapter(cart, getContext());
@@ -278,6 +278,8 @@ public class GalleryFragment extends Fragment {
         txtTotalPrice.setText(fmt.format(total));
     }
 
+ */
+
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         if (item.getTitle().equals(Common.DELETE))
@@ -292,7 +294,7 @@ public class GalleryFragment extends Fragment {
         for (Order item:cart)
             new Database(getContext()).addToCart(item);
 
-        loadListFood();
+        //loadListFood();
 
     }
 

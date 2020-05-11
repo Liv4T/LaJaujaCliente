@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
         adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(Category.class, R.layout.menu_item, MenuViewHolder.class, category) {
 
             @Override
-            protected void populateViewHolder(MenuViewHolder menuViewHolder, Category category, int i) {
+            protected void populateViewHolder(MenuViewHolder menuViewHolder, Category category, final int i) {
                 menuViewHolder.txtMenuName.setText(category.getName());
                 Picasso.with(getActivity().getBaseContext()).load(category.getImage())
                         .into(menuViewHolder.imageView);
@@ -91,7 +91,7 @@ public class HomeFragment extends Fragment {
                     public void onClick(View view, int position, boolean isLongClick) {
                         //Toast.makeText(getActivity(), ""+clickitem.getName(), Toast.LENGTH_SHORT).show();
                         Intent foodList = new Intent(getActivity(), FoodList.class);
-                        foodList.putExtra("CategoryId", adapter.getRef(position).getKey());
+                        foodList.putExtra("CategoryId", adapter.getRef(i).getKey());
                         startActivity(foodList);
                     }
                 });
