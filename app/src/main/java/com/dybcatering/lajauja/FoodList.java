@@ -264,7 +264,7 @@ public class FoodList extends AppCompatActivity {
         }
     };
         Log.d("TAG", ""+adapter.getItemCount());
-    recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
         swipeRefreshLayout.setRefreshing(false);
 
     }

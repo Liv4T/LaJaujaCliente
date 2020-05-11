@@ -91,7 +91,7 @@ public class HomeFragment extends Fragment {
                     public void onClick(View view, int position, boolean isLongClick) {
                         //Toast.makeText(getActivity(), ""+clickitem.getName(), Toast.LENGTH_SHORT).show();
                         Intent foodList = new Intent(getActivity(), FoodList.class);
-                        foodList.putExtra("CategoryId", adapter.getRef(i).getKey());
+                        foodList.putExtra("CategoryId", adapter.getRef(position).getKey());
                         startActivity(foodList);
                     }
                 });

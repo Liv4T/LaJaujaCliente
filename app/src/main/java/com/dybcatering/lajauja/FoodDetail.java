@@ -3,6 +3,7 @@ package com.dybcatering.lajauja;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +18,8 @@ import com.dybcatering.lajauja.Database.Database;
 import com.dybcatering.lajauja.Model.Food;
 import com.dybcatering.lajauja.Model.Order;
 import com.dybcatering.lajauja.Model.Rating;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +35,8 @@ import com.stepstone.apprating.listener.RatingDialogListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+
+import info.hoang8f.widget.FButton;
 
 public class FoodDetail extends AppCompatActivity implements RatingDialogListener {
 
@@ -49,6 +54,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
     FirebaseDatabase database;
     DatabaseReference foods;
     DatabaseReference ratingTbl;
+    FButton showComment;
 
     Food currentFood;
     @Override
@@ -63,6 +69,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         btnCart = findViewById(R.id.btnCart);
         btnRating = findViewById(R.id.btnRating);
         ratingBar = findViewById(R.id.ratingBar);
+        showComment = findViewById(R.id.btnShowComments);
 
         btnRating.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +94,15 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         });
 
         btnCart.setCount(new Database(this).getCountCart());
+
+        showComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FoodDetail.this, ShowComment.class);
+                intent.putExtra(Common.INTENT_FOOD_ID, foodId);
+                startActivity(intent);
+            }
+        });
 
         food_description = findViewById(R.id.food_description);
         food_name = findViewById(R.id.food_name);
@@ -189,6 +205,18 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                     foodId,
                     String.valueOf(value),
                     comments);
+
+            ratingTbl.push()
+                    .setValue(rating)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(FoodDetail.this, "Gracias por enviar su opinión", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+            /*
             ratingTbl.child(Common.currentUser.getPhone()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -207,5 +235,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
 
                 }
             });
+             */
+
     }
 }

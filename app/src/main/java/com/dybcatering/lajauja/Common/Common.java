@@ -19,6 +19,8 @@ public class Common {
 
     public static final String BASE_URL = "https://fcm.googleapis.com/";
 
+    public static final String INTENT_FOOD_ID = "FoodId";
+
     public static APIService getFCMService(){
         return RetrofitClient.getClient(BASE_URL).create(APIService.class);
     }
