@@ -211,7 +211,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(FoodDetail.this, "Gracias por enviar su opinión", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FoodDetail.this, "Gracias por enviar su opinion", Toast.LENGTH_SHORT).show();
 
                         }
                     });

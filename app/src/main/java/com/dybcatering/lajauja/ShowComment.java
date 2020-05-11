@@ -76,10 +76,10 @@ public class ShowComment extends AppCompatActivity {
                 @Override
                 protected void populateViewHolder(ShowCommentViewHolder showCommentViewHolder, Rating rating, int i) {
                     int count=0, sum=0;
-
+   //                 showCommentViewHolder.ratingBar.setRating(rating.getRateValue());
                     showCommentViewHolder.txtComment.setText(rating.getComment());
                     showCommentViewHolder.txtUserPhone.setText(rating.getUserPhone());
-                    sum+=Integer.parseInt(rating.getRateValue());
+
                     count++;
                     if (count !=0) {
                         float average = sum/count;

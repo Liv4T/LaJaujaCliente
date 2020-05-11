@@ -85,7 +85,8 @@ public class Home extends AppCompatActivity {
        // recyclerView_menu.setHasFixedSize(true);
        // layoutManager = new LinearLayoutManager(this);
        // recyclerView_menu.setLayoutManager(layoutManager);
-        updateToken(FirebaseInstanceId.getInstance().getToken());
+
+   //     updateToken(FirebaseInstanceId.getInstance().getToken());
     }
 
     @Override
