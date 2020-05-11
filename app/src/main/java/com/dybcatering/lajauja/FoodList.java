@@ -20,6 +20,7 @@ import com.dybcatering.lajauja.Database.Database;
 import com.dybcatering.lajauja.Interface.ItemOnclickListener;
 import com.dybcatering.lajauja.Model.Category;
 import com.dybcatering.lajauja.Model.Food;
+import com.dybcatering.lajauja.Model.Order;
 import com.dybcatering.lajauja.ViewHolder.FoodViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -211,8 +212,23 @@ public class FoodList extends AppCompatActivity {
         @Override
         protected void populateViewHolder(final FoodViewHolder foodViewHolder, final Food food, final int i) {
             foodViewHolder.food_name.setText(food.getFood());
+            foodViewHolder.food_price.setText("Precio: "+ food.getPrice());
             Picasso.with(getBaseContext()).load(food.getImage())
                     .into(foodViewHolder.food_image);
+
+            foodViewHolder.quick_cart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new Database(getBaseContext()).addToCart(new Order(
+                            adapter.getRef(i).getKey(),
+                            food.getFood(),
+                            "1",
+                            food.getPrice(),
+                            food.getDiscount()
+                    ));
+                    Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+                }
+            });
   /*
             if (localDB.isFavorite(adapter.getRef(i).getKey()))
                 foodViewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
@@ -250,5 +266,12 @@ public class FoodList extends AppCompatActivity {
     recyclerView.setAdapter(adapter);
         swipeRefreshLayout.setRefreshing(false);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adapter !=null)
+            adapter.notifyDataSetChanged();
     }
 }

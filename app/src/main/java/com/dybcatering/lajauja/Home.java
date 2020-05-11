@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.andremion.counterfab.CounterFab;
 import com.dybcatering.lajauja.Common.Common;
+import com.dybcatering.lajauja.Database.Database;
 import com.dybcatering.lajauja.Model.Token;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -32,7 +34,7 @@ public class Home extends AppCompatActivity {
     DatabaseReference category;
 
     TextView txtFull;
-
+    CounterFab fab;
 
 
     @Override
@@ -46,7 +48,7 @@ public class Home extends AppCompatActivity {
        // category = database.getReference("Category");
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,6 +59,8 @@ public class Home extends AppCompatActivity {
 
             }
         });
+
+        fab.setCount(new Database(this).getCountCart());
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -82,6 +86,12 @@ public class Home extends AppCompatActivity {
        // layoutManager = new LinearLayoutManager(this);
        // recyclerView_menu.setLayoutManager(layoutManager);
         updateToken(FirebaseInstanceId.getInstance().getToken());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fab.setCount(new Database(this).getCountCart());
     }
 
     private void updateToken(String token) {

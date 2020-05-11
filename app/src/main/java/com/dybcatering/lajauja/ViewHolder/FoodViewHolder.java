@@ -12,8 +12,8 @@ import com.dybcatering.lajauja.R;
 
 public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView food_name;
-    public ImageView food_image;//, fav_image;
+    public TextView food_name, food_price;
+    public ImageView food_image, quick_cart;
     private ItemOnclickListener itemClickListener;
 
     public void setItemClickListener(ItemOnclickListener itemClickListener) {
@@ -26,7 +26,8 @@ public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         super(itemView);
         food_name = itemView.findViewById(R.id.food_name);
         food_image = itemView.findViewById(R.id.food_image);
-        //fav_image = itemView.findViewById(R.id.fav);
+        food_price = itemView.findViewById(R.id.food_price);
+        quick_cart = itemView.findViewById(R.id.add_cart);
 
         itemView.setOnClickListener(this);
 
