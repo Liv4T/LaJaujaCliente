@@ -224,7 +224,8 @@ public class FoodList extends AppCompatActivity {
                             food.getFood(),
                             "1",
                             food.getPrice(),
-                            food.getDiscount()
+                            food.getDiscount(),
+                            food.getImage()
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
                 }

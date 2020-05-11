@@ -21,6 +21,7 @@ import com.dybcatering.lajauja.Database.Database;
 import com.dybcatering.lajauja.Interface.ItemOnclickListener;
 import com.dybcatering.lajauja.Model.Order;
 import com.dybcatering.lajauja.R;
+import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ import java.util.Locale;
 
      public TextView txt_cart_name, txt_price;
      public ElegantNumberButton btn_quantity;
+     public ImageView cart_image;
 
      private ItemOnclickListener itemOnclickListener;
 
@@ -44,6 +46,7 @@ import java.util.Locale;
          txt_cart_name = itemView.findViewById(R.id.cart_item_name);
          txt_price = itemView.findViewById(R.id.cart_item_price);
          btn_quantity = itemView.findViewById(R.id.btn_quantity);
+         cart_image= itemView.findViewById(R.id.cart_image);
 
          itemView.setOnCreateContextMenuListener(this);
 
@@ -82,9 +85,12 @@ import java.util.Locale;
 
         @Override
         public void onBindViewHolder(@NonNull CartViewHolder holder, final int position) {
-        //    TextDrawable drawable = TextDrawable.builder()
-          //          .buildRound(""+listData.get(position).getQuantity(), Color.RED);
-           // holder.img_cart_count.setImageDrawable(drawable);
+
+            Picasso.with(cart.getApplicationContext())
+                    .load(listData.get(position).getImage())
+                    .resize(70,70)
+                    .centerCrop()
+                    .into(holder.cart_image);
 
             holder.btn_quantity.setNumber(listData.get(position).getQuantity());
             holder.btn_quantity.setOnValueChangeListener(new ElegantNumberButton.OnValueChangeListener() {
