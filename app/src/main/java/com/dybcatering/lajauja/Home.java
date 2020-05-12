@@ -1,9 +1,14 @@
 package com.dybcatering.lajauja;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.andremion.counterfab.CounterFab;
@@ -15,7 +20,10 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -107,18 +115,81 @@ public class Home extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
-  //      Paper.init(Home.this);
-    //    Paper.book().destroy();
-//        Intent signIn = new Intent(Home.this, SignIn.class);
-  //      signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-    //    startActivity(signIn);
+
         return true;
     }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+
+        switch (item.getItemId()){
+            case R.id.close:
+
+                      Paper.init(Home.this);
+                    Paper.book().destroy();
+                    Intent signIn = new Intent(Home.this, SignIn.class);
+                      signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(signIn);
+
+                return true;
+            case R.id.settings:
+                showSettingDialog();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    private void showSettingDialog(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
+        alertDialog.setTitle("Cambiar configuración");
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View layout_home = inflater.inflate(R.layout.setting_layout, null);
+
+        final CheckBox ckb = layout_home.findViewById(R.id.ckb_sub_news);
+
+        Paper.init(this);
+        String isSuscribe = Paper.book().read("sub_new");
+
+        if (isSuscribe == null || TextUtils.isEmpty(isSuscribe) || isSuscribe.equals("false")){
+            ckb.setChecked(false);
+        }else{
+            ckb.setChecked(true);
+        }
+
+        alertDialog.setView(layout_home);
+
+        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+                if (ckb.isChecked()){
+                    FirebaseMessaging.getInstance().subscribeToTopic(Common.topicName);
+                    Paper.book().write("sub_new", "true");
+                }else{
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic(Common.topicName);
+                    Paper.book().write("sub_new", "false");
+                }
+
+            }
+        });
+        alertDialog.show();
+
     }
 
 }

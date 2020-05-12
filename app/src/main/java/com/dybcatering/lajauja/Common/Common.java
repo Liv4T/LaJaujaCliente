@@ -9,6 +9,9 @@ import com.dybcatering.lajauja.Remote.APIService;
 import com.dybcatering.lajauja.Remote.RetrofitClient;
 
 public class Common {
+
+        public static String topicName = "News";
+
     public static User currentUser;
 
     public static final String DELETE = "Eliminar";
