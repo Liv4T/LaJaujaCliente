@@ -197,6 +197,7 @@ public class GalleryFragment extends Fragment {
                                 txtTotalPrice.getText().toString(),
                                 "0",
                                 comment,
+                                "Paypal",
                                 jsonObject.getJSONObject("response").getString("state"),
                                 cart
                         );

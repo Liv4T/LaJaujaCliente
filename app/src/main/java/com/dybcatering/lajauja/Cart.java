@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -137,6 +138,11 @@ public class Cart extends AppCompatActivity {
 
         final MaterialEditText edtAdress = order_address_comment.findViewById(R.id.edtAdress);
         final MaterialEditText edtComment = order_address_comment.findViewById(R.id.edtComment);
+
+
+        final RadioButton rdPayPal = order_address_comment.findViewById(R.id.rdiPaypal);
+        final RadioButton rdCOD = order_address_comment.findViewById(R.id.rdiCOD);
+
         alertDialog.setView(order_address_comment);
         alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
 
@@ -147,19 +153,46 @@ public class Cart extends AppCompatActivity {
                 address = edtAdress.getText().toString();
                 comment = edtComment.getText().toString();
 
+                if (!rdCOD.isChecked() && !rdPayPal.isChecked()){
+                    Toast.makeText(Cart.this, "Por Favor Seleccione una Opción", Toast.LENGTH_SHORT).show();
+                    return;
+                }else if (rdPayPal.isChecked()){
+                    String formatAmmount = txtTotalPrice.getText().toString()
+                            .replace("$", "")
+                            .replace(",", "");
 
-                String formatAmmount = txtTotalPrice.getText().toString()
-                                        .replace("$", "")
-                                        .replace(",", "");
+                    PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmmount),
+                            "USD",
+                            "Orden La Jauja ",
+                            PayPalPayment.PAYMENT_INTENT_SALE);
+                    Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);
+                    intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+                    intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
+                    startActivityForResult(intent, PAYPAL_REQUEST_CODE);
+                }else if (rdCOD.isChecked()){
+                    Request request = new Request(
+                            Common.currentUser.getPhone(),
+                            Common.currentUser.getName(),
+                            address,
+                            txtTotalPrice.getText().toString(),
+                            "0",
+                            comment,
+                            "Paypal",
+                            "sinPagar",
+                            //falta agregar lat y long desde la peticion
+                            cart
+                    );
+                    String order_number = String.valueOf(System.currentTimeMillis());
+                    requests.child(order_number)
+                            .setValue(request);
 
-                PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmmount),
-                        "USD",
-                        "Orden La Jauja ",
-                        PayPalPayment.PAYMENT_INTENT_SALE);
-                Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);
-                intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-                intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
-                startActivityForResult(intent, PAYPAL_REQUEST_CODE);
+                    new Database(getBaseContext()).cleanCart();
+                    sendNotification(order_number);
+
+                    Toast.makeText(Cart.this, "Gracias, la orden ha sido recibida", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+
 
 
 
@@ -194,6 +227,7 @@ public class Cart extends AppCompatActivity {
                                 txtTotalPrice.getText().toString(),
                                 "0",
                                 comment,
+                                "Paypal",
                                 jsonObject.getJSONObject("response").getString("state"),
                                 cart
                         );
