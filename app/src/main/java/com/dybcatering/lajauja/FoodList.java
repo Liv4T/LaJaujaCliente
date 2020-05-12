@@ -107,56 +107,57 @@ public class FoodList extends AppCompatActivity {
                         Toast.makeText(FoodList.this, "Por favor revisa tu conexión a internet", Toast.LENGTH_SHORT).show();
                     }
                 }
+
+                materialSearchBar = findViewById(R.id.searchBar);
+
+                materialSearchBar.setHint("Busca tu comida");
+                //materialSearchBar.setSpeechMode(false);
+                loadSuggest();
+                materialSearchBar.setCardViewElevation(10);
+                materialSearchBar.addTextChangeListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        List<String> suggest = new ArrayList<String>();
+                        for (String search: suggestList){
+                            if (search.toLowerCase().contains(materialSearchBar.getText().toLowerCase()))
+                                suggest.add(search);
+                        }
+                        materialSearchBar.setLastSuggestions(suggest);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+                materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
+                    @Override
+                    public void onSearchStateChanged(boolean enabled) {
+                        if (!enabled)
+                            recyclerView.setAdapter(adapter);
+                    }
+
+                    @Override
+                    public void onSearchConfirmed(CharSequence text) {
+                        startSearch(text);
+                    }
+
+                    @Override
+                    public void onButtonClicked(int buttonCode) {
+
+                    }
+                });
             }
         });
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
 
-        materialSearchBar = findViewById(R.id.searchBar);
 
-        materialSearchBar.setHint("Busca tu comida");
-        //materialSearchBar.setSpeechMode(false);
-        loadSuggest();
-        materialSearchBar.setLastSuggestions(suggestList);
-        materialSearchBar.setCardViewElevation(10);
-        materialSearchBar.addTextChangeListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-    
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                List<String> suggest = new ArrayList<String>();
-                for (String search: suggestList){
-                    if (search.toLowerCase().contains(materialSearchBar.getText().toLowerCase()))
-                        suggest.add(search);
-                }
-                materialSearchBar.setLastSuggestions(suggest);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
-            @Override
-            public void onSearchStateChanged(boolean enabled) {
-                if (!enabled)
-                    recyclerView.setAdapter(adapter);
-            }
-
-            @Override
-            public void onSearchConfirmed(CharSequence text) {
-                startSearch(text);
-            }
-
-            @Override
-            public void onButtonClicked(int buttonCode) {
-
-            }
-        });
 
     }
 
@@ -165,7 +166,7 @@ public class FoodList extends AppCompatActivity {
                 Food.class,
                 R.layout.food_item,
                 FoodViewHolder.class,
-                foodList.orderByChild("Food").equalTo(text.toString())
+                foodList.orderByChild("food").equalTo(text.toString())
         ) {
             @Override
             protected void populateViewHolder(final FoodViewHolder foodViewHolder, final Food food, final int i) {
@@ -198,6 +199,9 @@ public class FoodList extends AppCompatActivity {
                             Food item = postSnapshot.getValue(Food.class);
                             suggestList.add(item.getFood());
                         }
+
+                        materialSearchBar.setLastSuggestions(suggestList);
+
                     }
 
                     @Override
@@ -212,7 +216,7 @@ public class FoodList extends AppCompatActivity {
         @Override
         protected void populateViewHolder(final FoodViewHolder foodViewHolder, final Food food, final int i) {
             foodViewHolder.food_name.setText(food.getFood());
-            foodViewHolder.food_price.setText("Precio: "+ food.getPrice());
+            foodViewHolder.food_price.setText(food.getPrice());
             Picasso.with(getBaseContext()).load(food.getImage())
                     .into(foodViewHolder.food_image);
 

@@ -57,14 +57,11 @@ public class HomeFragment extends Fragment {
     HashMap<String,String> image_list;
     SliderLayout mSlider;
 
-   // public HomeFragment(FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter) {
-     //   this.adapter = adapter;
-   // }
+
     View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        //homeViewModel =                ViewModelProviders.of(this).get(HomeViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
 
 
