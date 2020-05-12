@@ -139,6 +139,12 @@ public class Home extends AppCompatActivity {
                 showSettingDialog();
                 return true;
 
+            case R.id.buscar:
+                Intent search = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(search);
+
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
 

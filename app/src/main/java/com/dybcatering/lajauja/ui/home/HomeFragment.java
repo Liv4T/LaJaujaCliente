@@ -29,6 +29,7 @@ import com.dybcatering.lajauja.Model.Banner;
 import com.dybcatering.lajauja.Model.Category;
 import com.dybcatering.lajauja.Model.Token;
 import com.dybcatering.lajauja.R;
+import com.dybcatering.lajauja.SearchActivity;
 import com.dybcatering.lajauja.ViewHolder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +38,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -57,6 +59,7 @@ public class HomeFragment extends Fragment {
     HashMap<String,String> image_list;
     SliderLayout mSlider;
 
+    MaterialSearchBar materialSearchBar;
 
     View root;
 
@@ -122,6 +125,16 @@ public class HomeFragment extends Fragment {
         recyclerView_menu.setLayoutAnimation(controller);
 
         setupSlider();
+
+        materialSearchBar = root.findViewById(R.id.searchBar);
+
+        materialSearchBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent search = new Intent(getActivity(), SearchActivity.class);
+                startActivity(search);
+            }
+        });
 
 
         updateToken(FirebaseInstanceId.getInstance().getToken());
