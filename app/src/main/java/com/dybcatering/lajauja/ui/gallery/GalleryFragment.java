@@ -3,16 +3,12 @@ package com.dybcatering.lajauja.ui.gallery;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,26 +16,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dybcatering.lajauja.Cart;
 import com.dybcatering.lajauja.Common.Common;
 import com.dybcatering.lajauja.Common.Config;
 import com.dybcatering.lajauja.Database.Database;
+import com.dybcatering.lajauja.Model.DataMessage;
 import com.dybcatering.lajauja.Model.MyResponse;
-import com.dybcatering.lajauja.Model.Notification;
 import com.dybcatering.lajauja.Model.Order;
 import com.dybcatering.lajauja.Model.Request;
-import com.dybcatering.lajauja.Model.Sender;
 import com.dybcatering.lajauja.Model.Token;
 import com.dybcatering.lajauja.R;
 import com.dybcatering.lajauja.Remote.APIService;
 import com.dybcatering.lajauja.ViewHolder.CartAdapter;
-import com.dybcatering.lajauja.ViewHolder.OrderViewHolder;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,15 +46,11 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
+import java.util.Map;
 
 import info.hoang8f.widget.FButton;
 import retrofit2.Call;
@@ -233,11 +219,13 @@ public class GalleryFragment extends Fragment {
                 for (DataSnapshot postSnapShot: dataSnapshot.getChildren()){
                     Token serverToken = postSnapShot.getValue(Token.class);
 
-                    Notification notification = new Notification("La Jauja", "Tienes una nueva orden"+order_number);
-
-                    Sender content = new Sender(serverToken.getToken(), notification);
-
-                    mService.sendNotification(content)
+//                    Notification notification = new Notification("La Jauja", "Tienes una nueva orden"+order_number);
+                    //                  Sender content = new Sender(serverToken.getToken(), notification);
+                    Map<String, String > dataSend = new HashMap<>();
+                    dataSend.put("title", "La Jauja");
+                    dataSend.put("message", "Tienes una nueva orden"+order_number);
+                    DataMessage dataMessage = new DataMessage(serverToken.getToken(), dataSend);
+                    mService.sendNotification(dataMessage)
                             .enqueue(new Callback<MyResponse>() {
                                 @Override
                                 public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {

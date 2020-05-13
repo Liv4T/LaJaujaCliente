@@ -24,7 +24,7 @@ public class NotificationHelper extends ContextWrapper {
         super(base);
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O){
             createChannel();
-            
+
         }
     }
 
@@ -51,6 +51,16 @@ public class NotificationHelper extends ContextWrapper {
     public Notification.Builder getLaJaujaChannelNotification(String title, String body, PendingIntent contentIntent, Uri soundUri){
         return new Notification.Builder(getApplicationContext(),LAJAUJA_CHANNEL_ID)
                 .setContentIntent(contentIntent)
+                .setContentTitle(title)
+                .setContentText(body)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSound(soundUri)
+                .setAutoCancel(false);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public Notification.Builder getLaJaujaChannelNotification(String title, String body, Uri soundUri){
+        return new Notification.Builder(getApplicationContext(),LAJAUJA_CHANNEL_ID)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setSmallIcon(R.mipmap.ic_launcher)

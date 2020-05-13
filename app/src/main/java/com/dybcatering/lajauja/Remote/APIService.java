@@ -2,8 +2,8 @@ package com.dybcatering.lajauja.Remote;
 
 
 
+import com.dybcatering.lajauja.Model.DataMessage;
 import com.dybcatering.lajauja.Model.MyResponse;
-import com.dybcatering.lajauja.Model.Sender;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -19,5 +19,5 @@ public interface APIService {
     )
 
     @POST("fcm/send")
-    Call<MyResponse> sendNotification(@Body Sender body);
+    Call<MyResponse> sendNotification(@Body DataMessage body);
 }
