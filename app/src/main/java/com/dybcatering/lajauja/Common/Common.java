@@ -8,6 +8,9 @@ import com.dybcatering.lajauja.Model.User;
 import com.dybcatering.lajauja.Remote.APIService;
 import com.dybcatering.lajauja.Remote.RetrofitClient;
 
+import java.util.Calendar;
+import java.util.Locale;
+
 public class Common {
 
         public static String topicName = "News";
@@ -50,5 +53,15 @@ public class Common {
             }
         }
         return false;
+    }
+
+    public static  String getDate(long time){
+        Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
+        calendar.setTimeInMillis(time);
+        StringBuilder date = new StringBuilder(android.text.format.DateFormat.format("dd-MM-yyyy HH:mm"
+                ,calendar)
+                .toString());
+
+        return date.toString();
     }
 }

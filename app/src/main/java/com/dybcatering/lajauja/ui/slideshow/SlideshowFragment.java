@@ -73,6 +73,7 @@ public class SlideshowFragment extends Fragment {
                 orderViewHolder.txtOrderStatus.setText(convertCodeToStatus(request.getStatus()));
                 orderViewHolder.txtOrderAddress.setText(request.getAddress());
                 orderViewHolder.txtOrderPhone.setText(request.getPhone());
+                orderViewHolder.txtOrderDate.setText(Common.getDate(Long.parseLong(adapter.getRef(i).getKey())));
 
             }
         };

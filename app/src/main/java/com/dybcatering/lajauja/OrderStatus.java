@@ -60,6 +60,8 @@ public class OrderStatus extends AppCompatActivity {
                     orderViewHolder.txtOrderStatus.setText(Common.convertCodeToStatus(request.getStatus()));
                     orderViewHolder.txtOrderAddress.setText(request.getAddress());
                     orderViewHolder.txtOrderPhone.setText(request.getPhone());
+                    orderViewHolder.txtOrderDate.setText(Common.getDate(Long.parseLong(adapter.getRef(i).getKey())));
+
 
             }
         };
