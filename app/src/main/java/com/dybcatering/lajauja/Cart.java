@@ -162,6 +162,9 @@ public class Cart extends AppCompatActivity {
                     intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
                     startActivityForResult(intent, PAYPAL_REQUEST_CODE);
                 }else if (rdCOD.isChecked()){
+
+                    String latlng = "";
+
                     Request request = new Request(
                             Common.currentUser.getPhone(),
                             Common.currentUser.getName(),
@@ -171,6 +174,7 @@ public class Cart extends AppCompatActivity {
                             comment,
                             "Paypal",
                             "sinPagar",
+                            latlng,
                             //falta agregar lat y long desde la peticion
                             cart
                     );
@@ -211,6 +215,7 @@ public class Cart extends AppCompatActivity {
                         String paymentDetail = confirmation.toJSONObject().toString(4);
                         JSONObject jsonObject = new JSONObject(paymentDetail);
 
+                        String latlng = "";
 
                         Request request = new Request(
                                 Common.currentUser.getPhone(),
@@ -221,6 +226,7 @@ public class Cart extends AppCompatActivity {
                                 comment,
                                 "Paypal",
                                 jsonObject.getJSONObject("response").getString("state"),
+                                latlng,
                                 cart
                         );
                         String order_number = String.valueOf(System.currentTimeMillis());

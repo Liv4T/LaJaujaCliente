@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 
 import com.dybcatering.lajauja.Model.User;
 import com.dybcatering.lajauja.Remote.APIService;
+import com.dybcatering.lajauja.Remote.IGoogleService;
 import com.dybcatering.lajauja.Remote.RetrofitClient;
 
 import java.util.Calendar;
@@ -14,6 +15,7 @@ import java.util.Locale;
 public class Common {
 
         public static String topicName = "News";
+        public static String currentKey;
 
     public static User currentUser;
 
@@ -24,6 +26,12 @@ public class Common {
     public static String PHONE_TEXT = "userPhone";
 
     public static final String BASE_URL = "https://fcm.googleapis.com/";
+
+    public static final String maps = "https://maps.googleapis.com";
+
+    public static IGoogleService getGoogleMapsApi(){
+        return RetrofitClient.getClient(maps).create(IGoogleService.class);
+    }
 
     public static final String INTENT_FOOD_ID = "FoodId";
 

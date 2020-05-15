@@ -1,5 +1,6 @@
 package com.dybcatering.lajauja.ui.slideshow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dybcatering.lajauja.Common.Common;
+import com.dybcatering.lajauja.Interface.ItemOnclickListener;
 import com.dybcatering.lajauja.Model.Request;
+import com.dybcatering.lajauja.OrderStatus;
 import com.dybcatering.lajauja.R;
+import com.dybcatering.lajauja.TrackingOrder;
 import com.dybcatering.lajauja.ViewHolder.OrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +41,7 @@ public class SlideshowFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
+
         database = FirebaseDatabase.getInstance();
         requests = database.getReference("Request");
 
@@ -45,14 +50,15 @@ public class SlideshowFragment extends Fragment {
         layoutManager =  new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-
-      //  if (Common.IsConnectedToInternet(getContext())){
+        if (getActivity().getIntent().getExtras() == null)
             loadOrders(Common.currentUser.getPhone());
-       // }else{
-        //    Toast.makeText(getContext(), "Por favor revisa tu conexión a internet", Toast.LENGTH_SHORT).show();
-
-        //}
-
+        else {
+//            loadOrders(getIntent().getStringExtra("userPhone"));
+            if (getActivity().getIntent().getStringExtra("userPhone") == null)
+                loadOrders(Common.currentUser.getPhone());
+            else
+                loadOrders(getActivity().getIntent().getStringExtra("userPhone"));
+        }
 
 
 
@@ -70,25 +76,26 @@ public class SlideshowFragment extends Fragment {
             @Override
             protected void populateViewHolder(OrderViewHolder orderViewHolder, Request request, int i) {
                 orderViewHolder.txtOrderId.setText(adapter.getRef(i).getKey());
-                orderViewHolder.txtOrderStatus.setText(convertCodeToStatus(request.getStatus()));
+                orderViewHolder.txtOrderStatus.setText(Common.convertCodeToStatus(request.getStatus()));
                 orderViewHolder.txtOrderAddress.setText(request.getAddress());
                 orderViewHolder.txtOrderPhone.setText(request.getPhone());
                 orderViewHolder.txtOrderDate.setText(Common.getDate(Long.parseLong(adapter.getRef(i).getKey())));
+
+                orderViewHolder.setItemClickListener(new ItemOnclickListener() {
+                    @Override
+                    public void onClick(View view, int position, boolean isLongClick) {
+                        Common.currentKey = adapter.getRef(position).getKey();
+                        startActivity(new Intent(getContext(), TrackingOrder.class));
+                    }
+                });
+
 
             }
         };
         recyclerView.setAdapter(adapter);
     }
 
-    private String convertCodeToStatus(String key) {
-        if (key.equals("0"))
-            return "Recibido";
-        else if (key.equals("1"))
-            return "En Camino";
-        else
-            return "Entregado !";
 
-    }
 
 
 }

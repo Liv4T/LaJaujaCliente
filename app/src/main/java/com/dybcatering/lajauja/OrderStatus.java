@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.dybcatering.lajauja.Common.Common;
 import com.dybcatering.lajauja.Database.Database;
+import com.dybcatering.lajauja.Interface.ItemOnclickListener;
 import com.dybcatering.lajauja.Model.Request;
 import com.dybcatering.lajauja.ViewHolder.OrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -42,7 +45,11 @@ public class OrderStatus extends AppCompatActivity {
         if (getIntent().getExtras() == null)
         loadOrders(Common.currentUser.getPhone());
         else {
-            loadOrders(getIntent().getStringExtra("userPhone"));
+//            loadOrders(getIntent().getStringExtra("userPhone"));
+            if (getIntent().getStringExtra("userPhone") == null)
+                loadOrders(Common.currentUser.getPhone());
+            else
+                loadOrders(getIntent().getStringExtra("userPhone"));
         }
     }
 
@@ -61,6 +68,14 @@ public class OrderStatus extends AppCompatActivity {
                     orderViewHolder.txtOrderAddress.setText(request.getAddress());
                     orderViewHolder.txtOrderPhone.setText(request.getPhone());
                     orderViewHolder.txtOrderDate.setText(Common.getDate(Long.parseLong(adapter.getRef(i).getKey())));
+
+                    orderViewHolder.setItemClickListener(new ItemOnclickListener() {
+                        @Override
+                        public void onClick(View view, int position, boolean isLongClick) {
+                            Common.currentKey = adapter.getRef(position).getKey();
+                            startActivity(new Intent(OrderStatus.this, TrackingOrder.class));
+                        }
+                    });
 
 
             }

@@ -175,7 +175,7 @@ public class GalleryFragment extends Fragment {
                         String paymentDetail = confirmation.toJSONObject().toString(4);
                         JSONObject jsonObject = new JSONObject(paymentDetail);
 
-
+                        String latlng = "";
                         Request request = new Request(
                                 Common.currentUser.getPhone(),
                                 Common.currentUser.getName(),
@@ -185,6 +185,7 @@ public class GalleryFragment extends Fragment {
                                 comment,
                                 "Paypal",
                                 jsonObject.getJSONObject("response").getString("state"),
+                                latlng,
                                 cart
                         );
                         String order_number = String.valueOf(System.currentTimeMillis());
