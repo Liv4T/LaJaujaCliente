@@ -64,7 +64,8 @@ public class FoodList extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
 
-        foodList = database.getReference("Foods");
+        foodList =database.getReference("Restaurants").child(Common.restaurantSelected)
+                .child("detail").child("Foods");
 
         localDB = new Database(this);
         recyclerView = findViewById(R.id.recycler_food);

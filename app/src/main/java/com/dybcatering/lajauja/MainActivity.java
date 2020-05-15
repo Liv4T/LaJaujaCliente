@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.dybcatering.lajauja.Common.Common;
+import com.dybcatering.lajauja.Model.Restaurant;
 import com.dybcatering.lajauja.Model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                         User user = dataSnapshot.child(phone).getValue(User.class);
                         user.setPhone(phone);
                         if (user.getPassword().equals(pwd)) {
-                            Intent intent = new Intent(MainActivity.this, Home.class);
+                            Intent intent = new Intent(MainActivity.this, RestaurantList.class);
                             Common.currentUser = user;
                             startActivity(intent);
                             finish();

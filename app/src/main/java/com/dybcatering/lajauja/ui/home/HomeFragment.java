@@ -94,7 +94,8 @@ public class HomeFragment extends Fragment {
         });
 
         database = FirebaseDatabase.getInstance();
-        category = database.getReference("Category");
+        category = database.getReference("Restaurants").child(Common.restaurantSelected)
+        .child("detail").child("Category");
 
         adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(Category.class, R.layout.menu_item, MenuViewHolder.class, category) {
 

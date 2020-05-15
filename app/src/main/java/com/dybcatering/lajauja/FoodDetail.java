@@ -63,7 +63,8 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         setContentView(R.layout.activity_food_detail);
 
         database = FirebaseDatabase.getInstance();
-        foods = database.getReference("Foods");
+        foods =database.getReference("Restaurants").child(Common.restaurantSelected)
+                .child("detail").child("Foods");
         ratingTbl = database.getReference("Rating");
         numberButton = findViewById(R.id.number_button);
         btnCart = findViewById(R.id.btnCart);

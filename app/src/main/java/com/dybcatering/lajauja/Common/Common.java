@@ -23,6 +23,8 @@ public class Common {
     public static final String USER_KEY = "User";
     public static final String PWD_KEY = "Password";
 
+    public static  String restaurantSelected ="";
+
     public static String PHONE_TEXT = "userPhone";
 
     public static final String BASE_URL = "https://fcm.googleapis.com/";
