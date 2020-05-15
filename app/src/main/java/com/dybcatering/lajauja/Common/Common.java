@@ -31,14 +31,15 @@ public class Common {
         return RetrofitClient.getClient(BASE_URL).create(APIService.class);
     }
 
-    public static String convertCodeToStatus(String key) {
-        if (key.equals("0"))
+    public static String convertCodeToStatus(String code){
+        if (code.equals("0")) {
             return "Recibido";
-        else if (key.equals("1"))
-            return "En Camino";
-        else
-            return "Entregado !";
-
+        }else if (code.equals("1")){
+            return "En camino";
+        }else if (code.equals("2")){
+            return "Enviando";
+        } else
+            return "Entregado";
     }
 
     public static boolean IsConnectedToInternet(Context context){

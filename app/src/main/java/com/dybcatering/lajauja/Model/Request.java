@@ -11,12 +11,13 @@ public class Request {
     private String comment;
     private String paymentMethod;
     private String paymentState;
+    private String latLng;
     private List<Order> foods;
 
     public Request() {
     }
 
-    public Request(String phone, String name, String address, String total, String status, String comment, String paymentMethod, String paymentState, List<Order> foods) {
+    public Request(String phone, String name, String address, String total, String status, String comment, String paymentMethod, String paymentState, String latLng, List<Order> foods) {
         this.phone = phone;
         this.name = name;
         this.address = address;
@@ -25,6 +26,7 @@ public class Request {
         this.comment = comment;
         this.paymentMethod = paymentMethod;
         this.paymentState = paymentState;
+        this.latLng = latLng;
         this.foods = foods;
     }
 
@@ -98,5 +100,13 @@ public class Request {
 
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public String getLatLng() {
+        return latLng;
+    }
+
+    public void setLatLng(String latLng) {
+        this.latLng = latLng;
     }
 }
