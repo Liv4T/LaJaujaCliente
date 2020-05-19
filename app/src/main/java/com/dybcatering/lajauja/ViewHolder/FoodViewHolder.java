@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dybcatering.lajauja.Interface.ItemOnclickListener;
 import com.dybcatering.lajauja.R;
 
+import org.fabiomsr.moneytextview.MoneyTextView;
+
 public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView food_name, food_price;
+    public TextView food_name;
+    public MoneyTextView food_price;
     public ImageView food_image, quick_cart;
     private ItemOnclickListener itemClickListener;
 

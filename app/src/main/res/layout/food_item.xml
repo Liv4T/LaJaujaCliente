@@ -54,14 +54,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="10">
-            <TextView
+            <org.fabiomsr.moneytextview.MoneyTextView
                 android:id="@+id/food_price"
                 android:layout_weight="9"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/helvetica"
                 android:gravity="center"
-                android:text="price"
+                appNs:symbol="$"
+                appNs:decimalDigitsTextSize="0dp"
                 android:textColor="@android:color/black"
                 android:layout_gravity="left"
                 android:foregroundGravity="left"

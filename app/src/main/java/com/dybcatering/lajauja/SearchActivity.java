@@ -63,7 +63,8 @@ public class SearchActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
 
-        foodList = database.getReference("Foods");
+        foodList =  database.getReference("Restaurants").child(Common.restaurantSelected)
+                .child("detail").child("Foods");
 
         localDB = new Database(this);
         recyclerView = findViewById(R.id.recycler_search);
@@ -131,7 +132,8 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             protected void populateViewHolder(final FoodViewHolder foodViewHolder, final Food food, final int i) {
                 foodViewHolder.food_name.setText(food.getFood());
-                foodViewHolder.food_price.setText(food.getPrice());
+                float precio = Float.parseFloat(food.getPrice());
+                foodViewHolder.food_price.setAmount(precio, "$");
                 Picasso.with(getBaseContext()).load(food.getImage())
                         .into(foodViewHolder.food_image);
 
