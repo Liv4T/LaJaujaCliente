@@ -150,7 +150,8 @@ public class HomeFragment extends Fragment {
         mSlider = root.findViewById(R.id.slider);
         image_list = new HashMap<>();
 
-        final DatabaseReference banners = database.getReference("Banner");
+        final DatabaseReference banners =database.getReference("Restaurants").child(Common.restaurantSelected)
+                .child("detail").child("Banner");
         banners.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
