@@ -37,7 +37,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
-import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
@@ -46,7 +45,6 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -132,8 +130,12 @@ public class Cart extends AppCompatActivity {
         final MaterialEditText edtComment = order_address_comment.findViewById(R.id.edtComment);
 
 
-        final RadioButton rdPayPal = order_address_comment.findViewById(R.id.rdiPaypal);
-        final RadioButton rdCOD = order_address_comment.findViewById(R.id.rdiCOD);
+        final RadioButton rdPayPal = order_address_comment.findViewById(R.id.rdiPagoDatofono);
+        final RadioButton rdCOD = order_address_comment.findViewById(R.id.rdiPagoContraEntrega);
+
+        final RadioButton rdHora1 = order_address_comment.findViewById(R.id.rdiHoraEntregaUno);
+        final RadioButton rdHora2 = order_address_comment.findViewById(R.id.rdiHoraEntregaDos);
+
 
         alertDialog.setView(order_address_comment);
         alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
@@ -145,10 +147,11 @@ public class Cart extends AppCompatActivity {
                 address = edtAdress.getText().toString();
                 comment = edtComment.getText().toString();
 
-                if (!rdCOD.isChecked() && !rdPayPal.isChecked()){
+                if (!rdCOD.isChecked() && !rdPayPal.isChecked() && !rdHora1.isChecked() && !rdHora2.isChecked()){
                     Toast.makeText(Cart.this, "Por Favor Seleccione una Opción", Toast.LENGTH_SHORT).show();
                     return;
-                }else if (rdPayPal.isChecked()){
+                }else if (rdPayPal.isChecked() && rdHora1.isChecked()){
+                    /*
                     String formatAmmount = txtTotalPrice.getText().toString()
                             .replace("$", "")
                             .replace(",", "");
@@ -161,7 +164,62 @@ public class Cart extends AppCompatActivity {
                     intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
                     intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
                     startActivityForResult(intent, PAYPAL_REQUEST_CODE);
-                }else if (rdCOD.isChecked()){
+                     */
+                    String latlng = "";
+
+                    Request request = new Request(
+                            Common.currentUser.getPhone(),
+                            Common.currentUser.getName(),
+                            address,
+                            txtTotalPrice.getText().toString(),
+                            "0",
+                            comment,
+                            "Pago Con Datáfono",
+                            "8:00 a 14:00",
+                            latlng,
+                            //falta agregar lat y long desde la peticion
+                            cart
+                    );
+                    String order_number = String.valueOf(System.currentTimeMillis());
+                    requests.child(order_number)
+                            .setValue(request);
+
+                    new Database(getBaseContext()).cleanCart();
+                    sendNotification(order_number);
+
+                    Toast.makeText(Cart.this, "Gracias, la orden ha sido recibida", Toast.LENGTH_SHORT).show();
+                    finish();
+
+
+
+                }else if (rdPayPal.isChecked() && rdHora2.isChecked()){
+                    String latlng = "";
+
+                    Request request = new Request(
+                            Common.currentUser.getPhone(),
+                            Common.currentUser.getName(),
+                            address,
+                            txtTotalPrice.getText().toString(),
+                            "0",
+                            comment,
+                            "Pago Con Datafono",
+                            "14:00 a 18:00",
+                            latlng,
+                            //falta agregar lat y long desde la peticion
+                            cart
+                    );
+                    String order_number = String.valueOf(System.currentTimeMillis());
+                    requests.child(order_number)
+                            .setValue(request);
+
+                    new Database(getBaseContext()).cleanCart();
+                    sendNotification(order_number);
+
+                    Toast.makeText(Cart.this, "Gracias, la orden ha sido recibida", Toast.LENGTH_SHORT).show();
+                    finish();
+
+
+                } else if (rdCOD.isChecked() && rdHora1.isChecked()){
 
                     String latlng = "";
 
@@ -172,8 +230,34 @@ public class Cart extends AppCompatActivity {
                             txtTotalPrice.getText().toString(),
                             "0",
                             comment,
-                            "Paypal",
-                            "sinPagar",
+                            "Pago Contra Entrega",
+                            "8:00 a 14:00",
+                            latlng,
+                            //falta agregar lat y long desde la peticion
+                            cart
+                    );
+                    String order_number = String.valueOf(System.currentTimeMillis());
+                    requests.child(order_number)
+                            .setValue(request);
+
+                    new Database(getBaseContext()).cleanCart();
+                    sendNotification(order_number);
+
+                    Toast.makeText(Cart.this, "Gracias, la orden ha sido recibida", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else if (rdCOD.isChecked() && rdHora2.isChecked()){
+
+                    String latlng = "";
+
+                    Request request = new Request(
+                            Common.currentUser.getPhone(),
+                            Common.currentUser.getName(),
+                            address,
+                            txtTotalPrice.getText().toString(),
+                            "0",
+                            comment,
+                            "Pago Contra Entrega",
+                            "14:00 a 18:00",
                             latlng,
                             //falta agregar lat y long desde la peticion
                             cart
@@ -224,8 +308,9 @@ public class Cart extends AppCompatActivity {
                                 txtTotalPrice.getText().toString(),
                                 "0",
                                 comment,
-                                "Paypal",
-                                jsonObject.getJSONObject("response").getString("state"),
+                                "Pago Con Datáfono",
+//                                jsonObject.getJSONObject("response").getString("state"),
+                                "SinPagar",
                                 latlng,
                                 cart
                         );

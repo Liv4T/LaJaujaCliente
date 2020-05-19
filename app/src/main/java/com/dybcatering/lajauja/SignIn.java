@@ -68,13 +68,13 @@ public class SignIn extends AppCompatActivity {
                                 User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
                                 user.setPhone(edtPhone.getText().toString());
                                 if (user.getPassword().equals(edtPassword.getText().toString())) {
-                                    Intent intent = new Intent(SignIn.this, Home.class);
+                                    Intent intent = new Intent(SignIn.this, RestaurantList.class);
                                     Common.currentUser = user;
                                     startActivity(intent);
                                     finish();
 
                                 } else {
-                                    Toast.makeText(SignIn.this, "No se pudo iniciar sesión", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignIn.this, "Contraseña Incorrecta", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 mDialog.dismiss();
