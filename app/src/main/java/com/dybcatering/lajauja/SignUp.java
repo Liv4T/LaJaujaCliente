@@ -70,7 +70,7 @@ public class SignUp extends AppCompatActivity {
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                edtDate.setText(year+"/"+month+"/"+dayOfMonth);
+                edtDate.setText(year + "/" + month  + "/" + dayOfMonth);
             }
         };
 

@@ -9,11 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.andremion.counterfab.CounterFab;
 import com.dybcatering.lajauja.Common.Common;
 import com.dybcatering.lajauja.Database.Database;
+import com.dybcatering.lajauja.Model.Request;
 import com.dybcatering.lajauja.Model.Token;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -21,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -95,6 +99,32 @@ public class Home extends AppCompatActivity {
        // recyclerView_menu.setLayoutManager(layoutManager);
 
    //     updateToken(FirebaseInstanceId.getInstance().getToken());
+        
+        showAlertPopUp();
+    }
+
+    private void showAlertPopUp() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
+        alertDialog.setTitle("Información");
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View order_address_comment = inflater.inflate(R.layout.pop_up_alert, null);
+
+        alertDialog.setView(order_address_comment);
+        alertDialog.setIcon(R.drawable.ic_star_full_48dp);
+
+
+        alertDialog.setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+
+        alertDialog.show();
+
+
     }
 
     @Override
