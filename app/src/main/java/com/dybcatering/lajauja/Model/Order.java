@@ -8,12 +8,13 @@ public class Order {
     private String Price;
     private String Discount;
     private String Image;
+    private String Accomp;
 
     public Order() {
     }
 
 
-    public Order( String productId, String productName, String quantity, String price, String discount, String image) {
+    public Order( String productId, String productName, String quantity, String price, String discount, String image, String accomp) {
 
         ProductId = productId;
         ProductName = productName;
@@ -21,9 +22,10 @@ public class Order {
         Price = price;
         Discount = discount;
         Image = image;
+        Accomp = accomp;
     }
 
-    public Order(int ID, String productId, String productName, String quantity, String price, String discount, String image) {
+    public Order(int ID, String productId, String productName, String quantity, String price, String discount, String image, String accomp) {
         this.ID = ID;
         ProductId = productId;
         ProductName = productName;
@@ -31,6 +33,8 @@ public class Order {
         Price = price;
         Discount = discount;
         Image = image;
+        Accomp = accomp;
+
     }
 
     public int getID() {
@@ -87,5 +91,13 @@ public class Order {
 
     public void setImage(String image) {
         Image = image;
+    }
+
+    public String getAccomp() {
+        return Accomp;
+    }
+
+    public void setAccomp(String accomp) {
+        Accomp = accomp;
     }
 }

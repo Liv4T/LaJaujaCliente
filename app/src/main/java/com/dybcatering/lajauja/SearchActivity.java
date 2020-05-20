@@ -146,7 +146,8 @@ public class SearchActivity extends AppCompatActivity {
                                 "1",
                                 food.getPrice(),
                                 food.getDiscount(),
-                                food.getImage()
+                                food.getImage(),
+                                "vacio"
                         ));
                         Toast.makeText(SearchActivity.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
                     }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selecciona un Acompañamiento" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radiobolonesa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Boloñesa (250gr)" />
+
+            <RadioButton
+                android:id="@+id/radiocarbonara"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Carbonara (250gr)" />
+
+            <RadioButton
+                android:id="@+id/radionapolitana"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Napolitana (250gr)" />
+
+            <RadioButton
+                android:id="@+id/radioverduras"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Verduras (250gr)" />
+
+            <RadioButton
+                android:id="@+id/radiopesto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pesto (250gr)" />
+
+
+        </RadioGroup>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
