@@ -29,72 +29,67 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
- class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
-    , View.OnCreateContextMenuListener {
+class CartViewHolderFragment extends RecyclerView.ViewHolder implements View.OnClickListener
+   , View.OnCreateContextMenuListener {
 
-     public TextView txt_cart_name, txt_cart_acomp, txt_price;
-     public ElegantNumberButton btn_quantity;
-     public ImageView cart_image;
+    public TextView txt_cart_name, txt_cart_acomp, txt_price;
+    public ElegantNumberButton btn_quantity;
+    public ImageView cart_image;
 
-     private ItemOnclickListener itemOnclickListener;
+    private ItemOnclickListener itemOnclickListener;
 
-     public void setTxt_cart_name(TextView txt_cart_name) {
-         this.txt_cart_name = txt_cart_name;
-     }
+    public void setTxt_cart_name(TextView txt_cart_name) {
+        this.txt_cart_name = txt_cart_name;
+    }
 
-     public CartViewHolder(@NonNull View itemView) {
-         super(itemView);
-         txt_cart_name = itemView.findViewById(R.id.cart_item_name);
-         txt_cart_acomp = itemView.findViewById(R.id.cart_item_acomp);
-         txt_price = itemView.findViewById(R.id.cart_item_price);
-         btn_quantity = itemView.findViewById(R.id.btn_quantity);
-         cart_image= itemView.findViewById(R.id.cart_image);
+    public CartViewHolderFragment(@NonNull View itemView) {
+        super(itemView);
+        txt_cart_name = itemView.findViewById(R.id.cart_item_name);
+        txt_cart_acomp = itemView.findViewById(R.id.cart_item_acomp);
+        txt_price = itemView.findViewById(R.id.cart_item_price);
+        btn_quantity = itemView.findViewById(R.id.btn_quantity);
+        cart_image= itemView.findViewById(R.id.cart_image);
 
-         itemView.setOnCreateContextMenuListener(this);
+        itemView.setOnCreateContextMenuListener(this);
 
-     }
+    }
 
-     @Override
-     public void onClick(View v) {
+    @Override
+    public void onClick(View v) {
 
-     }
+    }
 
-     @Override
-     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        menu.setHeaderTitle("Selecciona una opción");
-        menu.add(0,0,getAdapterPosition(), Common.DELETE);
-     }
- }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+       menu.setHeaderTitle("Selecciona una opción");
+       menu.add(0,0,getAdapterPosition(), Common.DELETE);
+    }
+}
 
-    public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
+    public class CartAdapterFragment extends RecyclerView.Adapter<CartViewHolderFragment> {
 
         private List<Order> listData = new ArrayList<>();
-        private Cart cart;
         private GalleryFragment galleryFragment;
 
-        public CartAdapter(List<Order> listData, Cart cart) {
-            this.listData = listData;
-            this.cart = cart;
-        }
 
-        public CartAdapter(List<Order> listData, GalleryFragment galleryFragment) {
+        public CartAdapterFragment(List<Order> listData, GalleryFragment galleryFragment) {
             this.listData = listData;
             this.galleryFragment = galleryFragment;
         }
 
         @NonNull
         @Override
-        public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater = LayoutInflater.from(cart);
+        public CartViewHolderFragment onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater inflater = LayoutInflater.from(galleryFragment.getContext());
             View itemView = inflater.inflate(R.layout.cart_layout, parent, false);
-            return new CartViewHolder(itemView);
+            return new CartViewHolderFragment(itemView);
 
         }
 
         @Override
-        public void onBindViewHolder(@NonNull CartViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull CartViewHolderFragment holder, final int position) {
 
-            Picasso.with(cart.getApplicationContext())
+            Picasso.with(galleryFragment.getContext())
                     .load(listData.get(position).getImage())
                     .resize(70,70)
                     .centerCrop()
@@ -106,16 +101,16 @@ import java.util.Locale;
                 public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
                     Order order = listData.get(position);
                     order.setQuantity(String.valueOf(newValue));
-                    new Database(cart).updateCart(order);
+                    new Database(galleryFragment.getContext()).updateCart(order);
 
                     int total = 0;
-                    List<Order> orders = new Database(cart).getCarts();
+                    List<Order> orders = new Database(galleryFragment.getContext()).getCarts();
                     for (Order item:orders)
                         total+=(Integer.parseInt(order.getPrice()))*(Integer.parseInt(item.getQuantity()));
                     Locale locale = new Locale("en", "US");
                     NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
 
-                    cart.txtTotalPrice.setText(fmt.format(total));
+                    galleryFragment.txtTotalPrice.setText(fmt.format(total));
                 }
             });
 

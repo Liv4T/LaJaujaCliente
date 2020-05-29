@@ -60,7 +60,6 @@ import retrofit2.Response;
 
 public class Cart extends AppCompatActivity {
 
-    private static final int  PAYPAL_REQUEST_CODE = 9999;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
 
@@ -76,9 +75,6 @@ public class Cart extends AppCompatActivity {
 
    APIService mService;
 
-   static PayPalConfiguration config = new PayPalConfiguration()
-           .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX) // pruebas SANDBOX y produccion PRODUCTION
-           .clientId(Config.PAYPAL_CLIENT_ID);
 
    String address, comment;
 
@@ -87,9 +83,6 @@ public class Cart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        Intent intent = new Intent(this, PayPalService.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-        startService(intent);
 
         mService = Common.getFCMService();
 
@@ -107,7 +100,7 @@ public class Cart extends AppCompatActivity {
         btnPlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cart.size() > 0)
+                if (cart.size() > 0 )
                 showAlertDialog();
                 else
                     Toast.makeText(Cart.this, "Tu carrito esta vacio", Toast.LENGTH_SHORT).show();
@@ -276,53 +269,7 @@ public class Cart extends AppCompatActivity {
         alertDialog.show();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PAYPAL_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
-                if (confirmation != null) {
-                    try {
-                        String paymentDetail = confirmation.toJSONObject().toString(4);
-                        JSONObject jsonObject = new JSONObject(paymentDetail);
 
-                        String latlng = "";
-
-                        Request request = new Request(
-                                Common.currentUser.getPhone(),
-                                Common.currentUser.getName(),
-                                address,
-                                txtTotalPrice.getText().toString(),
-                                "0",
-                                comment,
-                                "Pago Con Datáfono",
-//                                jsonObject.getJSONObject("response").getString("state"),
-                                "SinPagar",
-                                latlng,
-                                cart
-                        );
-                        String order_number = String.valueOf(System.currentTimeMillis());
-                        requests.child(order_number)
-                                .setValue(request);
-
-                        new Database(getBaseContext()).cleanCart();
-                        sendNotification(order_number);
-
-                        Toast.makeText(this, "Gracias, la orden ha sido recibida", Toast.LENGTH_SHORT).show();
-                        finish();
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } else if (resultCode == Activity.RESULT_CANCELED){
-                Toast.makeText(this, "Pago cancelado", Toast.LENGTH_SHORT).show();
-            } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID){
-                Toast.makeText(this, "Pago Inválido", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
     private void sendNotification(final String order_number) {
         DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");

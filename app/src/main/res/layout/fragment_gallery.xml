@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@drawable/background"
-    tools:context=".Cart">
+    android:background="@drawable/background">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listCart"
@@ -41,7 +40,7 @@
 
                 <TextView
                     android:id="@+id/total"
-                    android:text="$10.000"
+                    android:text="$0"
                     android:textSize="24sp"
                     android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
