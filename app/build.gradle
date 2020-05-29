@@ -9,8 +9,8 @@ android {
         applicationId "com.dybcatering.lajauja"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 5
-        versionName "5.0"
+        versionCode 6
+        versionName "6.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -97,5 +97,9 @@ dependencies {
 
     //braintree
     implementation 'com.braintreepayments:card-form:3.1.1'
+
+    //progressbar
+    implementation 'cc.cloudist.acplibrary:library:1.2.1'
+
 
 }

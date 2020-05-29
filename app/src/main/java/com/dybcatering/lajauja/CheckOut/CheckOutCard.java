@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.braintreepayments.cardform.view.CardForm;
@@ -40,6 +42,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cc.cloudist.acplibrary.ACProgressConstant;
+import cc.cloudist.acplibrary.ACProgressFlower;
 import co.epayco.android.Epayco;
 import co.epayco.android.models.Authentication;
 import co.epayco.android.models.Card;
@@ -64,6 +68,7 @@ public class CheckOutCard extends AppCompatActivity {
 
     APIService mService;
 
+    ACProgressFlower dialogloading;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,14 +76,13 @@ public class CheckOutCard extends AppCompatActivity {
 
         mService = Common.getFCMService();
 
+
+
         cardForm = findViewById(R.id.card_form);
         buy = findViewById(R.id.btnBuy);
         cardForm.cardRequired(true)
                 .expirationRequired(true)
                 .cvvRequired(true)
-                .postalCodeRequired(true)
-                .mobileNumberRequired(true)
-                .mobileNumberExplanation("SMS is required on this number")
                 .setup(CheckOutCard.this);
         cardForm.getCvvEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
 
@@ -90,17 +94,24 @@ public class CheckOutCard extends AppCompatActivity {
             public void onClick(View view) {
                 if (cardForm.isValid()) {
                     alertBuilder = new AlertDialog.Builder(CheckOutCard.this);
-                    alertBuilder.setTitle("Confirm before purchase");
-                    alertBuilder.setMessage("Card number: " + cardForm.getCardNumber() + "\n" +
+                    alertBuilder.setTitle("Confirmar Compra");
+                    alertBuilder.setMessage("Número de Tarjeta: " + cardForm.getCardNumber() + "\n" +
                             "Fecha de expiración: " + cardForm.getExpirationDateEditText().getText().toString() + "\n" +
-                            "CVV: " + cardForm.getCvv() + "\n" +
-                            "Dirección: " + cardForm.getPostalCode() + "\n" +
-                            "Teléfono: " + cardForm.getMobileNumber());
-                    alertBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                            "CVV: " + cardForm.getCvv() + "\n" );
+                    alertBuilder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
-                            Toast.makeText(CheckOutCard.this, "Thank you for purchase", Toast.LENGTH_LONG).show();
+//                            Toast.makeText(CheckOutCard.this, "Thank you for purchase", Toast.LENGTH_LONG).show();
+
+                             dialogloading = new ACProgressFlower.Builder(CheckOutCard.this)
+                                    .direction(ACProgressConstant.DIRECT_CLOCKWISE)
+                                    .themeColor(Color.WHITE)
+                                    .text("Registrando pago")
+                                    .fadeColor(Color.DKGRAY).build();
+
+                            dialogloading.show();
+
 
                             Authentication auth = new Authentication();
 
@@ -121,7 +132,9 @@ public class CheckOutCard extends AppCompatActivity {
                             epayco.createToken(card, new EpaycoCallback() {
                                 @Override
                                 public void onSuccess(JSONObject data) throws JSONException {
-                                    Toast.makeText(CheckOutCard.this, "el token es"+data.get("id"), Toast.LENGTH_SHORT).show();
+                             //       Toast.makeText(CheckOutCard.this, "el token es"+data.get("id"), Toast.LENGTH_SHORT).show();
+
+
 
 
                                     EnviarCliente(data.getString("id"));
@@ -148,7 +161,7 @@ public class CheckOutCard extends AppCompatActivity {
                     alertDialog.show();
 
                 } else {
-                    Toast.makeText(CheckOutCard.this, "Please complete the form", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CheckOutCard.this, "Por favor complete el formulario", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -170,15 +183,15 @@ public class CheckOutCard extends AppCompatActivity {
         Client client = new Client();
 
         client.setTokenId(id);
-        client.setName("Cliente epayco");
+        client.setName(Common.currentUser.getName());
         client.setEmail("cliente@epayco.co");
-        client.setPhone("305274321");
+        client.setPhone(Common.currentUser.getPhone());
         client.setDefaultCard(true);
 
         epayco.createCustomer(client, new EpaycoCallback() {
             @Override
             public void onSuccess(JSONObject data) throws JSONException {
-                Toast.makeText(CheckOutCard.this, "es" + data.get("customerId"), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(CheckOutCard.this, "es" + data.get("customerId"), Toast.LENGTH_SHORT).show();
 
                 EnviarTransaccion(id, data.getString("customerId"));
 
@@ -227,7 +240,7 @@ public class CheckOutCard extends AppCompatActivity {
 
 //Required
         charge.setDocType("CC");
-        charge.setDocNumber("1012441994");
+        charge.setDocNumber(Common.currentUser.getDocument());
         charge.setName(Common.currentUser.getName());
         charge.setLastName(Common.currentUser.getLastName());
         charge.setEmail("danielbuitragosarmiento@gmail.com");
@@ -268,6 +281,7 @@ public class CheckOutCard extends AppCompatActivity {
                 new Database(getBaseContext()).cleanCart();
                 sendNotification(order_number);
 
+                dialogloading.dismiss();
                 Toast.makeText(CheckOutCard.this, "Gracias, la orden ha sido recibida", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CheckOutCard.this, Home.class);
                 startActivity(intent);

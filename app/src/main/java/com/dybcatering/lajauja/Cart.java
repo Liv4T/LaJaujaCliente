@@ -220,39 +220,44 @@ public class Cart extends AppCompatActivity {
 
 
                 }else if ( rdHora2.isChecked()){
-                    String latlng = "";
                     String formatAmmount = txtTotalPrice.getText().toString()
                             .replace("$", "")
-                            .replace(",", "");
+                            .replace(",", "")
+                            .replace(".00", "");
 
+                    int validacion = Integer.parseInt(formatAmmount);
+
+                    int total = 0;
+                    if (validacion <= 60000){
+                        total  = validacion + 6000;
+                    }else{
+                        total = validacion;
+                    }
+
+                    String totalconvertido = String.valueOf(total);
 
 /*
-                    Request request = new Request(
-                            Common.currentUser.getPhone(),
-                            Common.currentUser.getName(),
-                            address,
-                            txtTotalPrice.getText().toString(),
-                            "0",
-                            comment,
-                            "Pago Con Datafono",
-                            "14:00 a 18:00",
-                            latlng,
-                            //falta agregar lat y long desde la peticion
-                            cart
-                    );
-                    String order_number = String.valueOf(System.currentTimeMillis());
-                    requests.child(order_number)
-                            .setValue(request);
+                    PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmmount),
+                            "USD",
+                            "Orden La Jauja ",
+                            PayPalPayment.PAYMENT_INTENT_SALE);
+                    Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);
+                    intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+                    intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
+                    startActivityForResult(intent, PAYPAL_REQUEST_CODE);
+                     */
 
-                    new Database(getBaseContext()).cleanCart();
-                    sendNotification(order_number);
-
-                    Toast.makeText(Cart.this, "Gracias, la orden ha sido recibida", Toast.LENGTH_SHORT).show();
-                    finish();
- */
+                    Intent checkoutcard = new Intent(Cart.this, CheckOutCard.class);
+                    checkoutcard.putExtra("address", address);
+                    checkoutcard.putExtra("payment", totalconvertido);
+                    checkoutcard.putExtra("status", "0");
+                    checkoutcard.putExtra("comment", comment);
+                    checkoutcard.putExtra("paymentState", "14:00 a 18:00");
+                    startActivity(checkoutcard);
 
 
 
+                    String latlng = "";
 
                 }
 

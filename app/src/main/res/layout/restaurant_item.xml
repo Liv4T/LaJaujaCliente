@@ -6,7 +6,7 @@
     android:layout_margin="10dp"
 
     appNs:cardBackgroundColor="@android:color/transparent"
-    appNs:cardElevation="0dp"
+    appNs:cardElevation="10dp"
     >
 
     <RelativeLayout
