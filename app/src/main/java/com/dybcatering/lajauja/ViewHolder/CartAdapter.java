@@ -70,18 +70,13 @@ import java.util.Locale;
 
         private List<Order> listData = new ArrayList<>();
         private Cart cart;
-        private GalleryFragment galleryFragment;
+
 
         public CartAdapter(List<Order> listData, Cart cart) {
             this.listData = listData;
             this.cart = cart;
         }
-
-        public CartAdapter(List<Order> listData, GalleryFragment galleryFragment) {
-            this.listData = listData;
-            this.galleryFragment = galleryFragment;
-        }
-
+        
         @NonNull
         @Override
         public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
