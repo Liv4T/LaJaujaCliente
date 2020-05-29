@@ -44,22 +44,11 @@
                 android:layout_height="wrap_content"
                 android:text="Método de pago" />
 
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <RadioButton
-                    android:id="@+id/rdiPagoContraEntrega"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Pago Contra Entrega" />
-
-                <RadioButton
-                    android:id="@+id/rdiPagoCrediBanco"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Pago Con CrediBanco" />
-            </RadioGroup>
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/epayco" />
 
             <TextView
                 android:layout_width="wrap_content"

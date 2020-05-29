@@ -18,6 +18,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dybcatering.lajauja.CheckOut.CheckOutCard;
 import com.dybcatering.lajauja.Common.Common;
 import com.dybcatering.lajauja.Common.Config;
 import com.dybcatering.lajauja.Database.Database;
@@ -130,8 +131,8 @@ public class Cart extends AppCompatActivity {
         final MaterialEditText edtComment = order_address_comment.findViewById(R.id.edtComment);
 
 
-        final RadioButton rdCrediBanco = order_address_comment.findViewById(R.id.rdiPagoCrediBanco);
-        final RadioButton rdCOD = order_address_comment.findViewById(R.id.rdiPagoContraEntrega);
+       // final RadioButton rdCrediBanco = order_address_comment.findViewById(R.id.rdiPagoCrediBanco);
+       // final RadioButton rdCOD = order_address_comment.findViewById(R.id.rdiPagoContraEntrega);
 
         final RadioButton rdHora1 = order_address_comment.findViewById(R.id.rdiHoraEntregaUno);
         final RadioButton rdHora2 = order_address_comment.findViewById(R.id.rdiHoraEntregaDos);
@@ -147,14 +148,16 @@ public class Cart extends AppCompatActivity {
                 address = edtAdress.getText().toString();
                 comment = edtComment.getText().toString();
 
-                if (!rdCOD.isChecked() && !rdCrediBanco.isChecked() && !rdHora1.isChecked() && !rdHora2.isChecked()){
-                    Toast.makeText(Cart.this, "Por Favor Seleccione una Opción", Toast.LENGTH_SHORT).show();
+                if (!rdHora1.isChecked() && !rdHora2.isChecked()){
+                    Toast.makeText(Cart.this, "Por Favor Seleccione una Hora de Entrega", Toast.LENGTH_SHORT).show();
                     return;
-                }else if (rdCrediBanco.isChecked() && rdHora1.isChecked()){
+                }else if (rdHora1.isChecked()){
 
                     String formatAmmount = txtTotalPrice.getText().toString()
                             .replace("$", "")
-                            .replace(",", "");
+                            .replace(",", "")
+                            .replace(".00", "");
+
 /*
                     PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmmount),
                             "USD",
@@ -166,8 +169,18 @@ public class Cart extends AppCompatActivity {
                     startActivityForResult(intent, PAYPAL_REQUEST_CODE);
                      */
 
-                    String latlng = "";
+                    Intent checkoutcard = new Intent(Cart.this, CheckOutCard.class);
+                    checkoutcard.putExtra("address", address);
+                    checkoutcard.putExtra("payment", formatAmmount);
+                    checkoutcard.putExtra("status", "0");
+                    checkoutcard.putExtra("comment", comment);
+                    checkoutcard.putExtra("paymentState", "8:00 a 14:00");
+                    startActivity(checkoutcard);
 
+
+
+                    String latlng = "";
+/*
                     Request request = new Request(
                             Common.currentUser.getPhone(),
                             Common.currentUser.getName(),
@@ -190,18 +203,19 @@ public class Cart extends AppCompatActivity {
 
                     Toast.makeText(Cart.this, "Gracias, la orden ha sido recibida", Toast.LENGTH_SHORT).show();
                     finish();
+ */
 
 
 
-                }else if (rdCrediBanco.isChecked() && rdHora2.isChecked()){
+
+                }else if ( rdHora2.isChecked()){
                     String latlng = "";
                     String formatAmmount = txtTotalPrice.getText().toString()
                             .replace("$", "")
                             .replace(",", "");
 
 
-
-
+/*
                     Request request = new Request(
                             Common.currentUser.getPhone(),
                             Common.currentUser.getName(),
@@ -224,60 +238,11 @@ public class Cart extends AppCompatActivity {
 
                     Toast.makeText(Cart.this, "Gracias, la orden ha sido recibida", Toast.LENGTH_SHORT).show();
                     finish();
+ */
 
 
-                } else if (rdCOD.isChecked() && rdHora1.isChecked()){
 
-                    String latlng = "";
 
-                    Request request = new Request(
-                            Common.currentUser.getPhone(),
-                            Common.currentUser.getName(),
-                            address,
-                            txtTotalPrice.getText().toString(),
-                            "0",
-                            comment,
-                            "Pago Contra Entrega",
-                            "8:00 a 14:00",
-                            latlng,
-                            //falta agregar lat y long desde la peticion
-                            cart
-                    );
-                    String order_number = String.valueOf(System.currentTimeMillis());
-                    requests.child(order_number)
-                            .setValue(request);
-
-                    new Database(getBaseContext()).cleanCart();
-                    sendNotification(order_number);
-
-                    Toast.makeText(Cart.this, "Gracias, la orden ha sido recibida", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else if (rdCOD.isChecked() && rdHora2.isChecked()){
-
-                    String latlng = "";
-
-                    Request request = new Request(
-                            Common.currentUser.getPhone(),
-                            Common.currentUser.getName(),
-                            address,
-                            txtTotalPrice.getText().toString(),
-                            "0",
-                            comment,
-                            "Pago Contra Entrega",
-                            "14:00 a 18:00",
-                            latlng,
-                            //falta agregar lat y long desde la peticion
-                            cart
-                    );
-                    String order_number = String.valueOf(System.currentTimeMillis());
-                    requests.child(order_number)
-                            .setValue(request);
-
-                    new Database(getBaseContext()).cleanCart();
-                    sendNotification(order_number);
-
-                    Toast.makeText(Cart.this, "Gracias, la orden ha sido recibida", Toast.LENGTH_SHORT).show();
-                    finish();
                 }
 
 
