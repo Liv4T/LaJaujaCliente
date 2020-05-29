@@ -158,6 +158,17 @@ public class Cart extends AppCompatActivity {
                             .replace(",", "")
                             .replace(".00", "");
 
+                    int validacion = Integer.parseInt(formatAmmount);
+
+                    int total = 0;
+                    if (validacion <= 60000){
+                        total  = validacion + 6000;
+                    }else{
+                        total = validacion;
+                    }
+
+                    String totalconvertido = String.valueOf(total);
+
 /*
                     PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmmount),
                             "USD",
@@ -171,7 +182,7 @@ public class Cart extends AppCompatActivity {
 
                     Intent checkoutcard = new Intent(Cart.this, CheckOutCard.class);
                     checkoutcard.putExtra("address", address);
-                    checkoutcard.putExtra("payment", formatAmmount);
+                    checkoutcard.putExtra("payment", totalconvertido);
                     checkoutcard.putExtra("status", "0");
                     checkoutcard.putExtra("comment", comment);
                     checkoutcard.putExtra("paymentState", "8:00 a 14:00");
