@@ -55,10 +55,10 @@
                     android:text="Pago Contra Entrega" />
 
                 <RadioButton
-                    android:id="@+id/rdiPagoDatofono"
+                    android:id="@+id/rdiPagoCrediBanco"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pago Con Datáfono" />
+                    android:text="Pago Con CrediBanco" />
             </RadioGroup>
 
             <TextView

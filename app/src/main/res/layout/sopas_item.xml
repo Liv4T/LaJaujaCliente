@@ -47,6 +47,12 @@
                 android:layout_height="wrap_content"
                 android:text="Arroz Integral ($3,000)" />
 
+            <RadioButton
+                android:id="@+id/radiosinacompa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sin Acompañamiento" />
+
 
         </RadioGroup>
 

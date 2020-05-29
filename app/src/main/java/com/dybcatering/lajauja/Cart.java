@@ -130,7 +130,7 @@ public class Cart extends AppCompatActivity {
         final MaterialEditText edtComment = order_address_comment.findViewById(R.id.edtComment);
 
 
-        final RadioButton rdPayPal = order_address_comment.findViewById(R.id.rdiPagoDatofono);
+        final RadioButton rdCrediBanco = order_address_comment.findViewById(R.id.rdiPagoCrediBanco);
         final RadioButton rdCOD = order_address_comment.findViewById(R.id.rdiPagoContraEntrega);
 
         final RadioButton rdHora1 = order_address_comment.findViewById(R.id.rdiHoraEntregaUno);
@@ -147,15 +147,15 @@ public class Cart extends AppCompatActivity {
                 address = edtAdress.getText().toString();
                 comment = edtComment.getText().toString();
 
-                if (!rdCOD.isChecked() && !rdPayPal.isChecked() && !rdHora1.isChecked() && !rdHora2.isChecked()){
+                if (!rdCOD.isChecked() && !rdCrediBanco.isChecked() && !rdHora1.isChecked() && !rdHora2.isChecked()){
                     Toast.makeText(Cart.this, "Por Favor Seleccione una Opción", Toast.LENGTH_SHORT).show();
                     return;
-                }else if (rdPayPal.isChecked() && rdHora1.isChecked()){
-                    /*
+                }else if (rdCrediBanco.isChecked() && rdHora1.isChecked()){
+
                     String formatAmmount = txtTotalPrice.getText().toString()
                             .replace("$", "")
                             .replace(",", "");
-
+/*
                     PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmmount),
                             "USD",
                             "Orden La Jauja ",
@@ -165,6 +165,7 @@ public class Cart extends AppCompatActivity {
                     intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
                     startActivityForResult(intent, PAYPAL_REQUEST_CODE);
                      */
+
                     String latlng = "";
 
                     Request request = new Request(
@@ -192,8 +193,14 @@ public class Cart extends AppCompatActivity {
 
 
 
-                }else if (rdPayPal.isChecked() && rdHora2.isChecked()){
+                }else if (rdCrediBanco.isChecked() && rdHora2.isChecked()){
                     String latlng = "";
+                    String formatAmmount = txtTotalPrice.getText().toString()
+                            .replace("$", "")
+                            .replace(",", "");
+
+
+
 
                     Request request = new Request(
                             Common.currentUser.getPhone(),

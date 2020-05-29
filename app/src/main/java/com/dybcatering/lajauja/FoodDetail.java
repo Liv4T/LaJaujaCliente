@@ -36,6 +36,7 @@ import com.squareup.picasso.Picasso;
 import com.stepstone.apprating.AppRatingDialog;
 import com.stepstone.apprating.listener.RatingDialogListener;
 
+import org.fabiomsr.moneytextview.MoneyTextView;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -44,7 +45,8 @@ import info.hoang8f.widget.FButton;
 
 public class FoodDetail extends AppCompatActivity implements RatingDialogListener {
 
-    TextView food_name, food_price, food_description;
+    TextView food_name,  food_description;
+    MoneyTextView food_price;
     ImageView food_image;
     CollapsingToolbarLayout collapsingToolbarLayout;
     FloatingActionButton  btnRating;
@@ -587,7 +589,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
 
                 collapsingToolbarLayout.setTitle(currentFood.getFood());
 
-                food_price.setText(currentFood.getPrice());
+                food_price.setAmount(Float.parseFloat(currentFood.getPrice()), "$");
 
                 food_name.setText(currentFood.getFood());
 
