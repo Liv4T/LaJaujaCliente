@@ -95,15 +95,39 @@ public class Cart extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         txtTotalPrice = findViewById(R.id.total);
+
+
         btnPlace = findViewById(R.id.btnPlaceOrder);
 
         btnPlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cart.size() > 0 )
-                showAlertDialog();
-                else
-                    Toast.makeText(Cart.this, "Tu carrito esta vacio", Toast.LENGTH_SHORT).show();
+
+                String formatAmmount = txtTotalPrice.getText().toString()
+                        .replace("$", "")
+                        .replace(",", "")
+                        .replace(".00", "");
+
+                final int totalint = Integer.valueOf(formatAmmount);
+
+                int precio = 6000;
+                int total = 0;
+
+
+                if (totalint < 15000){
+                    Toast.makeText(Cart.this, "No es posible realizar una compra inferior a $15.000", Toast.LENGTH_SHORT).show();
+                }else if(totalint <60000){
+                    total = precio +totalint;
+                    String valor = String.valueOf(total);
+                    txtTotalPrice.setText("$"+valor);
+                    Toast.makeText(Cart.this, "Se agrega un precio adicional de $6.000 por costos de envío cuando el total es inferior a $60.0000", Toast.LENGTH_SHORT).show();
+                    showAlertDialog(total);
+                } else if (totalint > 60000) {
+                    showAlertDialog(total);
+                }  else {
+                        Toast.makeText(Cart.this, "Tu carrito esta vacio", Toast.LENGTH_SHORT).show();
+                    }
+
             }
         });
 
@@ -112,7 +136,7 @@ public class Cart extends AppCompatActivity {
 
     }
 
-    private void showAlertDialog() {
+    private void showAlertDialog(final int total) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(Cart.this);
         alertDialog.setTitle("Un paso más");
         alertDialog.setMessage("Ingresa la Dirección de Entrega");
@@ -146,19 +170,7 @@ public class Cart extends AppCompatActivity {
                     return;
                 }else if (rdHora1.isChecked()){
 
-                    String formatAmmount = txtTotalPrice.getText().toString()
-                            .replace("$", "")
-                            .replace(",", "")
-                            .replace(".00", "");
 
-                    int validacion = Integer.parseInt(formatAmmount);
-
-                    int total = 0;
-                    if (validacion <= 60000){
-                        total  = validacion + 6000;
-                    }else{
-                        total = validacion;
-                    }
 
                     String totalconvertido = String.valueOf(total);
 

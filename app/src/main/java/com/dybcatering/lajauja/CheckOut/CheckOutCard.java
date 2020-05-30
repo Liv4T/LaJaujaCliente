@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.braintreepayments.cardform.view.CardForm;
@@ -69,6 +70,8 @@ public class CheckOutCard extends AppCompatActivity {
     APIService mService;
 
     ACProgressFlower dialogloading;
+
+    TextView total;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +90,14 @@ public class CheckOutCard extends AppCompatActivity {
         cardForm.getCvvEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
 
         cart = new Database(this).getCarts();
+
+        total = findViewById(R.id.total);
+
+        Bundle b = new Bundle();
+        b = getIntent().getExtras();
+        final String payment = b.getString("payment");
+
+        total.setText(payment);
 
 
         buy.setOnClickListener(new View.OnClickListener() {
@@ -230,6 +241,8 @@ public class CheckOutCard extends AppCompatActivity {
         final String comment = b.getString("comment");
         final String paymentState = b.getString("paymentState");
         final String order_number = String.valueOf(System.currentTimeMillis());
+
+        total.setText("$"+ payment);
 
 
         Charge charge = new Charge();

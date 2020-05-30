@@ -76,7 +76,7 @@ import java.util.Locale;
             this.listData = listData;
             this.cart = cart;
         }
-        
+
         @NonNull
         @Override
         public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
