@@ -88,6 +88,9 @@ public class GalleryFragment extends Fragment {
         //        ViewModelProviders.of(this).get(GalleryViewModel.class);
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
 
+        Intent intent = new Intent(getContext(), Cart.class);
+        startActivity(intent);
+/*
         mService = Common.getFCMService();
 
         database = FirebaseDatabase.getInstance();
@@ -123,7 +126,7 @@ public class GalleryFragment extends Fragment {
                     String valor = String.valueOf(total);
                     txtTotalPrice.setText("$"+valor);
                     Toast.makeText(getContext(), "Se agrega un precio adicional de $6.000 por costos de envío cuando el total es inferior a $60.0000", Toast.LENGTH_SHORT).show();
-                    if (Common.currentUser.getName().isEmpty()){
+                    if (Common.currentUser.getName().equals("")){
                         iniciarRegistroFinal();
                     }else{
                         showAlertDialog(total);
@@ -139,6 +142,8 @@ public class GalleryFragment extends Fragment {
         });
 
         loadListFood();
+ */
+
 
         return root;
     }

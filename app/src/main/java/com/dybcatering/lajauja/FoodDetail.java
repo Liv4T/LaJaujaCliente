@@ -60,7 +60,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
     FirebaseDatabase database;
     DatabaseReference foods;
     DatabaseReference ratingTbl;
-    FButton showComment;
+    FButton showComment, btnOpenCart;
 
     Food currentFood;
     @Override
@@ -85,12 +85,11 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
             }
         });
 
-        btnCart.setOnClickListener(new View.OnClickListener() {
+        btnOpenCart = findViewById(R.id.btnOpenCart);
+
+        btnOpenCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //llamar al alertdialog
-
                 switch (currentFood.getMenuId()){
 
                     case "02":
@@ -129,6 +128,17 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 ));
                 Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
  */
+            }
+        });
+
+        btnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //llamar al alertdialog
+                Intent intent = new Intent(FoodDetail.this, Cart.class);
+                startActivity(intent);
+
 
             }
         });

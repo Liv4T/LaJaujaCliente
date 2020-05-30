@@ -124,7 +124,7 @@ public class Cart extends AppCompatActivity {
                     String valor = String.valueOf(total);
                     txtTotalPrice.setText("$"+valor);
                     Toast.makeText(Cart.this, "Se agrega un precio adicional de $6.000 por costos de envío cuando el total es inferior a $60.0000", Toast.LENGTH_SHORT).show();
-                    if (Common.currentUser.getName().isEmpty()){
+                    if (Common.currentUser.getName().equals("")){
                         iniciarRegistroFinal();
                     }else{
                         showAlertDialog(total);
