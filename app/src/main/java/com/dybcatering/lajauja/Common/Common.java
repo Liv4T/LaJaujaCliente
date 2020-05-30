@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 
 import com.dybcatering.lajauja.Model.User;
 import com.dybcatering.lajauja.Remote.APIService;
+import com.dybcatering.lajauja.Remote.IGeoCoordinates;
 import com.dybcatering.lajauja.Remote.IGoogleService;
 import com.dybcatering.lajauja.Remote.RetrofitClient;
 
@@ -81,4 +82,12 @@ public class Common {
 
         return date.toString();
     }
+
+    public static final String baseUrl = "https://maps.googleapis.com";
+
+
+    public static IGeoCoordinates getGeoCodeService(){
+        return RetrofitClient.getClient(baseUrl).create(IGeoCoordinates.class);
+    }
+
 }

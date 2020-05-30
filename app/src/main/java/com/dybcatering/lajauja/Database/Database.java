@@ -45,6 +45,8 @@ public class Database extends SQLiteAssetHelper {
                 ));
             }while (c.moveToNext());
         }
+        db.close();
+        c.close();
         return result;
     }
 
@@ -59,13 +61,14 @@ public class Database extends SQLiteAssetHelper {
                 order.getImage(),
                 order.getAccomp());
         db.execSQL(query);
-
+        db.close();
     }
 
     public void cleanCart(){
         SQLiteDatabase db = getReadableDatabase();
         String query = String.format("DELETE FROM OrderDetail");
         db.execSQL(query);
+        db.close();
 
     }
 

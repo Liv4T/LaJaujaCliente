@@ -74,7 +74,7 @@ public class SlideshowFragment extends Fragment {
                         .equalTo(phone)
         ) {
             @Override
-            protected void populateViewHolder(OrderViewHolder orderViewHolder, Request request, int i) {
+            protected void populateViewHolder(OrderViewHolder orderViewHolder, final Request request, int i) {
                 orderViewHolder.txtOrderId.setText(adapter.getRef(i).getKey());
                 orderViewHolder.txtOrderStatus.setText(Common.convertCodeToStatus(request.getStatus()));
                 orderViewHolder.txtOrderAddress.setText(request.getAddress());
@@ -84,8 +84,34 @@ public class SlideshowFragment extends Fragment {
                 orderViewHolder.setItemClickListener(new ItemOnclickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Common.currentKey = adapter.getRef(position).getKey();
-                        startActivity(new Intent(getContext(), TrackingOrder.class));
+
+                        switch (Common.convertCodeToStatus(request.getStatus())){
+
+                            case "Recibido":
+                                Toast.makeText(getContext(), "Cuando cambie a estado Enviando lo podrás visualizar en el mapa", Toast.LENGTH_SHORT).show();
+                                break;
+                            case "En camino":
+                                Toast.makeText(getContext(), "El estado esta en camino, pronto lo visualizarás en el mapa", Toast.LENGTH_SHORT).show();
+
+                                break;
+
+                            case "Enviando":
+                                Common.currentKey = adapter.getRef(position).getKey();
+                                startActivity(new Intent(getContext(), TrackingOrder.class));
+                                break;
+
+
+                        }
+/*
+                        if (Common.convertCodeToStatus(request.getStatus()).equals("0")){
+
+                        }else if (Common.convertCodeToStatus(request.getStatus()).equals("1")){
+                        } else {
+
+                        }
+ */
+
+
                     }
                 });
 

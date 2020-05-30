@@ -59,7 +59,7 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
 
     Polyline polyline;
 
-    String key = "AIzaSyAQX4J42upYNGDTtPfyjngnc0J6TB5THsg";
+    public String key = "AIzaSyDSppWPTs40BHl1R6WCOkdECz5w91ie1NU";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +111,9 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
                         if (currentOrder.getAddress() != null && !currentOrder.getAddress().isEmpty()){
 
                             mService.getLocationFromAddress(new StringBuilder("https://maps.googleapis.com/maps/api/geocode/json?address=")
-                            .append(currentOrder.getAddress()).toString())
+                            .append(currentOrder.getAddress()).toString(), key)
+
+
                                     .enqueue(new Callback<String>() {
                                         @Override
                                         public void onResponse(Call<String> call, Response<String> response) {
@@ -209,7 +211,7 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
 
                         }else if (currentOrder.getLatLng() != null && !currentOrder.getLatLng().isEmpty()){
                             mService.getLocationFromAddress(new StringBuilder("https://maps.googleapis.com/maps/api/geocode/json?latlng=")
-                                    .append(currentOrder.getLatLng()).toString())
+                                    .append(currentOrder.getLatLng()).toString(), key)
                                     .enqueue(new Callback<String>() {
                                         @Override
                                         public void onResponse(Call<String> call, Response<String> response) {
