@@ -195,7 +195,7 @@ public class CheckOutCard extends AppCompatActivity {
 
         client.setTokenId(id);
         client.setName(Common.currentUser.getName());
-        client.setEmail("cliente@epayco.co");
+        client.setEmail(Common.currentUser.getEmail());
         client.setPhone(Common.currentUser.getPhone());
         client.setDefaultCard(true);
 
@@ -256,14 +256,14 @@ public class CheckOutCard extends AppCompatActivity {
         charge.setDocNumber(Common.currentUser.getDocument());
         charge.setName(Common.currentUser.getName());
         charge.setLastName(Common.currentUser.getLastName());
-        charge.setEmail("danielbuitragosarmiento@gmail.com");
+        charge.setEmail(Common.currentUser.getEmail());
         charge.setInvoice("OR-"+order_number);
         charge.setDescription("Orden" + order_number);
         charge.setValue(payment);
         charge.setTax("0");
         charge.setTaxBase(payment);
         charge.setCurrency("COP");
-        charge.setDues("12");
+        charge.setDues("36");
         charge.setAddress(address);
         charge.setIp("190.000.000.000");/*This is the client's IP, it is required*/
 

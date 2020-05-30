@@ -56,16 +56,18 @@ public class MainActivity extends AppCompatActivity {
 
         String user = Paper.book().read(Common.USER_KEY);
         String pwd = Paper.book().read(Common.PWD_KEY);
-        if (user != null && pwd != null){
-            if (!user.isEmpty() && !pwd.isEmpty()){
-                login(user, pwd);
+//        if (user != null && pwd != null){
+        if (user != null ){
+            if (!user.isEmpty()){
+                login(user);
             }
         }
 
 
     }
 
-    private void login(final String phone, final String pwd){
+//    private void login(final String phone, final String pwd){
+    private void login(final String phone){
 
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                         mDialog.dismiss();
                         User user = dataSnapshot.child(phone).getValue(User.class);
                         user.setPhone(phone);
-                        if (user.getPassword().equals(pwd)) {
+                        if (user.getPhone().equals(phone)) {
                             Intent intent = new Intent(MainActivity.this, RestaurantList.class);
                             Common.currentUser = user;
                             startActivity(intent);

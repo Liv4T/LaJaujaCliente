@@ -22,6 +22,12 @@ public class Common {
     public static final String DELETE = "Eliminar";
     public static final String USER_KEY = "User";
     public static final String PWD_KEY = "Password";
+    public static final String EMAIL = "Email";
+    public static final String DIRECTION = "MyDirection";
+    public static final String NAME = "Name";
+    public static final String LAST_NAME = "LastName";
+    public static final String DATE = "Date";
+    public static final String DOCUMENT = "Document";
 
     public static  String restaurantSelected ="";
 

@@ -37,7 +37,7 @@
 
 
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <!--com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtPassword"
             android:hint="Contraseña"
             android:layout_width="match_parent"
@@ -53,7 +53,7 @@
             app:met_maxCharacters="10"
             app:met_primaryColor="@android:color/white"
             app:met_singleLineEllipsis="true"
-            />
+            /-->
 
         <com.rey.material.widget.CheckBox
             android:id="@+id/chkRemember"

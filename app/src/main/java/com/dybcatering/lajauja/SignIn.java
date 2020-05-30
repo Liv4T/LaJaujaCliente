@@ -24,17 +24,17 @@ import io.paperdb.Paper;
 
 public class SignIn extends AppCompatActivity {
 
-    MaterialEditText edtPhone, edtPassword;
+    MaterialEditText edtPhone;//, edtPassword;
     Button btnSignIn;
     CheckBox ckbRemember;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registrarse);
+        setContentView(R.layout.activity_login);
 
         edtPhone = findViewById(R.id.edtPhone);
-        edtPassword= findViewById(R.id.edtPassword);
+      //  edtPassword= findViewById(R.id.edtPassword);
         btnSignIn = findViewById(R.id.btnSignIn);
         ckbRemember = findViewById(R.id.chkRemember);
 
@@ -51,7 +51,9 @@ public class SignIn extends AppCompatActivity {
 
                     if (ckbRemember.isChecked()){
                         Paper.book().write(Common.USER_KEY, edtPhone.getText().toString());
-                        Paper.book().write(Common.PWD_KEY, edtPassword.getText().toString());
+                       // Paper.book().write(Common.PWD_KEY, edtPassword.getText().toString());
+                   //     Paper.book().write(Common.DIRECTION, edtD)
+
                     }
 
                     final ProgressDialog mDialog = new ProgressDialog(SignIn.this);
@@ -67,7 +69,7 @@ public class SignIn extends AppCompatActivity {
                                 mDialog.dismiss();
                                 User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
                                 user.setPhone(edtPhone.getText().toString());
-                                if (user.getPassword().equals(edtPassword.getText().toString())) {
+                                if (user.getPhone().equals(edtPhone.getText().toString())) {
                                     Intent intent = new Intent(SignIn.this, RestaurantList.class);
                                     Common.currentUser = user;
                                     startActivity(intent);

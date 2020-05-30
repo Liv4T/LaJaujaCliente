@@ -5,6 +5,7 @@ public class User {
     private String LastName;
     private String Date;
     private String Document;
+    private String  Email;
 
     private String MyDirection;
     private String Password;
@@ -23,14 +24,27 @@ public class User {
     }
 
      */
-    public User(String name, String lastName, String date, String document, String myDirection, String password) {
+
+    public User(String name, String lastName, String date, String document, String email, String myDirection, String password, String phone, String isStaff) {
         Name = name;
         LastName = lastName;
         Date = date;
         Document = document;
+        Email = email;
         MyDirection = myDirection;
         Password = password;
+        Phone = phone;
         IsStaff = "false";
+    }
+
+
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
     }
 
     public String getIsStaff() {

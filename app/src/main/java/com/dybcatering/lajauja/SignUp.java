@@ -26,7 +26,7 @@ import java.util.Calendar;
 
 public class SignUp extends AppCompatActivity {
 
-    MaterialEditText edtPhone, edtName, edtLastName, edtDocument, edtDirection, edtPassword, edtDate;
+    MaterialEditText edtPhone,  edtDirection;//, edtName, edtLastName, edtDocument, edtPassword, edtDate;
     Button btnSignUp, btnSelectDate;
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -36,17 +36,18 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        edtName = findViewById(R.id.edtName);
-        edtLastName = findViewById(R.id.edtLastName);
+       // edtName = findViewById(R.id.edtName);
+       // edtLastName = findViewById(R.id.edtLastName);
 
-        edtPassword = findViewById(R.id.edtPassword);
+       // edtPassword = findViewById(R.id.edtPassword);
+       // edtDate = findViewById(R.id.edtDate);
+        // edtDocument = findViewById(R.id.edtDocument);
         edtPhone = findViewById(R.id.edtPhone);
-        edtDate = findViewById(R.id.edtDate);
-        edtDocument = findViewById(R.id.edtDocument);
         edtDirection = findViewById(R.id.edtDirecion);
 
         btnSignUp = findViewById(R.id.btnSignUp);
 
+        /*
         btnSelectDate = findViewById(R.id.btnSelectDate);
 
         btnSelectDate.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +75,8 @@ public class SignUp extends AppCompatActivity {
             }
         };
 
+         */
+
 
 
 
@@ -93,7 +96,7 @@ public class SignUp extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            if (edtPhone.getText().toString().isEmpty() || edtName.getText().toString().isEmpty() || edtLastName.getText().toString().isEmpty() || edtPassword.getText().toString().isEmpty() || edtDate.getText().toString().isEmpty() || edtDocument.getText().toString().isEmpty() || edtDirection.getText().toString().isEmpty() ) {
+                            if (edtPhone.getText().toString().isEmpty() || edtDirection.getText().toString().isEmpty() ) {
 
                                 Toast.makeText(SignUp.this, "Por favor complete todos los Campos de Registro", Toast.LENGTH_SHORT).show();
 
@@ -106,7 +109,7 @@ public class SignUp extends AppCompatActivity {
                                     finish();
                                 } else {
                                     mDialog.dismiss();
-                                    User user = new User(edtName.getText().toString(), edtLastName.getText().toString(), edtDate.getText().toString(), edtDocument.getText().toString(), edtDirection.getText().toString(), edtPassword.getText().toString());
+                                    User user = new User("", "", "", "", "",  edtDirection.getText().toString(),"", "false", edtPhone.getText().toString());
                                     table_user.child(edtPhone.getText().toString()).setValue(user);
                                     Toast.makeText(SignUp.this, "Registrado satisfactoriamente", Toast.LENGTH_SHORT).show();
                                     finish();

@@ -24,6 +24,7 @@ import com.dybcatering.lajauja.Cart;
 import com.dybcatering.lajauja.CheckOut.CheckOutCard;
 import com.dybcatering.lajauja.Common.Common;
 import com.dybcatering.lajauja.Common.Config;
+import com.dybcatering.lajauja.CompraUsuario;
 import com.dybcatering.lajauja.Database.Database;
 import com.dybcatering.lajauja.Model.DataMessage;
 import com.dybcatering.lajauja.Model.MyResponse;
@@ -40,11 +41,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.paypal.android.sdk.payments.PayPalConfiguration;
-import com.paypal.android.sdk.payments.PayPalPayment;
-import com.paypal.android.sdk.payments.PayPalService;
-import com.paypal.android.sdk.payments.PaymentActivity;
-import com.paypal.android.sdk.payments.PaymentConfirmation;
+
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.json.JSONException;
@@ -107,10 +104,37 @@ public class GalleryFragment extends Fragment {
         btnPlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cart.size() > 0)
-                    showAlertDialog();
-                else
+
+                String formatAmmount = txtTotalPrice.getText().toString()
+                        .replace("$", "")
+                        .replace(",", "")
+                        .replace(".00", "");
+
+                final int totalint = Integer.valueOf(formatAmmount);
+
+                int precio = 6000;
+                int total = 0;
+
+
+                if (totalint < 15000){
+                    Toast.makeText(getContext(), "No es posible realizar una compra inferior a $15.000", Toast.LENGTH_SHORT).show();
+                }else if(totalint <60000){
+                    total = precio +totalint;
+                    String valor = String.valueOf(total);
+                    txtTotalPrice.setText("$"+valor);
+                    Toast.makeText(getContext(), "Se agrega un precio adicional de $6.000 por costos de envío cuando el total es inferior a $60.0000", Toast.LENGTH_SHORT).show();
+                    if (Common.currentUser.getName().isEmpty()){
+                        iniciarRegistroFinal();
+                    }else{
+                        showAlertDialog(total);
+                    }
+
+
+                } else if (totalint > 60000) {
+                    showAlertDialog(total);
+                }  else {
                     Toast.makeText(getContext(), "Tu carrito esta vacio", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -134,7 +158,7 @@ public class GalleryFragment extends Fragment {
         txtTotalPrice.setText(fmt.format(total));
     }
 
-    private void showAlertDialog() {
+    private void showAlertDialog(final int total) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
         alertDialog.setTitle("Un paso más");
         alertDialog.setMessage("Ingresa la Dirección de Entrega");
@@ -160,6 +184,8 @@ public class GalleryFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                edtAdress.setText(Common.currentUser.getMyDirection());
+
                 address = edtAdress.getText().toString();
                 comment = edtComment.getText().toString();
 
@@ -168,19 +194,7 @@ public class GalleryFragment extends Fragment {
                     return;
                 }else if (rdHora1.isChecked()){
 
-                    String formatAmmount = txtTotalPrice.getText().toString()
-                            .replace("$", "")
-                            .replace(",", "")
-                            .replace(".00", "");
 
-                    int validacion = Integer.parseInt(formatAmmount);
-
-                    int total = 0;
-                    if (validacion <= 60000){
-                        total  = validacion + 6000;
-                    }else{
-                        total = validacion;
-                    }
 
                     String totalconvertido = String.valueOf(total);
 
@@ -290,50 +304,6 @@ public class GalleryFragment extends Fragment {
 
         alertDialog.show();
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-            if (resultCode == RESULT_OK) {
-                PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
-                if (confirmation != null) {
-                    try {
-                        String paymentDetail = confirmation.toJSONObject().toString(4);
-                        JSONObject jsonObject = new JSONObject(paymentDetail);
-
-                        String latlng = "";
-                        Request request = new Request(
-                                Common.currentUser.getPhone(),
-                                Common.currentUser.getName(),
-                                address,
-                                txtTotalPrice.getText().toString(),
-                                "0",
-                                comment,
-                                "Paypal",
-                                jsonObject.getJSONObject("response").getString("state"),
-                                latlng,
-                                cart
-                        );
-                        String order_number = String.valueOf(System.currentTimeMillis());
-                        requests.child(order_number)
-                                .setValue(request);
-
-                        new Database(getContext()).cleanCart();
-                        sendNotification(order_number);
-
-                        Toast.makeText(getContext(), "Gracias, la orden ha sido recibida", Toast.LENGTH_SHORT).show();
-                        getActivity().finish();
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } else if (resultCode == Activity.RESULT_CANCELED){
-                Toast.makeText(getContext(), "Pago cancelado", Toast.LENGTH_SHORT).show();
-            } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID){
-                Toast.makeText(getContext(), "Pago Inválido", Toast.LENGTH_SHORT).show();
-
-        }
-    }
 
 
     private void sendNotification(final String order_number) {
@@ -411,6 +381,13 @@ public class GalleryFragment extends Fragment {
 
         //loadListFood();
 
+    }
+
+
+
+    private void iniciarRegistroFinal() {
+        Intent comprausuario = new Intent(getContext(), CompraUsuario.class);
+        startActivity(comprausuario);
     }
 
 }

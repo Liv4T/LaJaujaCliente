@@ -28,6 +28,7 @@ import com.dybcatering.lajauja.Model.Order;
 
 import com.dybcatering.lajauja.Model.Request;
 import com.dybcatering.lajauja.Model.Token;
+import com.dybcatering.lajauja.Model.User;
 import com.dybcatering.lajauja.Remote.APIService;
 import com.dybcatering.lajauja.ViewHolder.CartAdapter;
 
@@ -37,10 +38,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.paypal.android.sdk.payments.PayPalConfiguration;
-import com.paypal.android.sdk.payments.PayPalService;
-import com.paypal.android.sdk.payments.PaymentActivity;
-import com.paypal.android.sdk.payments.PaymentConfirmation;
+
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import org.json.JSONException;
@@ -99,6 +97,11 @@ public class Cart extends AppCompatActivity {
 
         btnPlace = findViewById(R.id.btnPlaceOrder);
 
+        User user = new User();
+       // final String nombreusuario = user.getName();
+
+
+
         btnPlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,7 +124,13 @@ public class Cart extends AppCompatActivity {
                     String valor = String.valueOf(total);
                     txtTotalPrice.setText("$"+valor);
                     Toast.makeText(Cart.this, "Se agrega un precio adicional de $6.000 por costos de envío cuando el total es inferior a $60.0000", Toast.LENGTH_SHORT).show();
-                    showAlertDialog(total);
+                    if (Common.currentUser.getName().isEmpty()){
+                        iniciarRegistroFinal();
+                    }else{
+                        showAlertDialog(total);
+                    }
+
+
                 } else if (totalint > 60000) {
                     showAlertDialog(total);
                 }  else {
@@ -134,6 +143,11 @@ public class Cart extends AppCompatActivity {
         loadListFood();
 
 
+    }
+
+    private void iniciarRegistroFinal() {
+        Intent comprausuario = new Intent(Cart.this, CompraUsuario.class);
+        startActivity(comprausuario);
     }
 
     private void showAlertDialog(final int total) {
@@ -161,6 +175,8 @@ public class Cart extends AppCompatActivity {
         alertDialog.setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                edtAdress.setText(Common.currentUser.getMyDirection());
 
                 address = edtAdress.getText().toString();
                 comment = edtComment.getText().toString();
@@ -296,7 +312,7 @@ public class Cart extends AppCompatActivity {
   //                  Sender content = new Sender(serverToken.getToken(), notification);
                     Map<String, String > dataSend = new HashMap<>();
                     dataSend.put("title", "La Jauja");
-                    dataSend.put("message", "Tienes una nueva orden"+order_number);
+                    dataSend.put("message", "Tienes una nueva orden: "+order_number);
                     DataMessage dataMessage = new DataMessage(serverToken.getToken(), dataSend);
 
 
