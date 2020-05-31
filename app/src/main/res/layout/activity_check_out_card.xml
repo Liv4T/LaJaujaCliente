@@ -29,7 +29,8 @@
         android:background="@color/colorAccent"
         android:textColorHighlight="@color/colorPrimary"
         android:text="$0"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/btnBuy"

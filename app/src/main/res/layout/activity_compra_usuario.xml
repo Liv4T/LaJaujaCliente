@@ -25,7 +25,10 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="Hola, para completar el pedido es necesario suministrar tus datos de contacto"
+                android:fontFamily="@font/helvetica"
+                android:textColor="@android:color/white"
+                android:textSize="25dp"/>
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edtName"

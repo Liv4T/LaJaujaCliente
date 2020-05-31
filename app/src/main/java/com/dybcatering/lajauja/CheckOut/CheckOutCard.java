@@ -93,9 +93,11 @@ public class CheckOutCard extends AppCompatActivity {
 
         total = findViewById(R.id.total);
 
+
         Bundle b = new Bundle();
         b = getIntent().getExtras();
         final String payment = b.getString("payment");
+
 
         total.setText(payment);
 
@@ -108,7 +110,8 @@ public class CheckOutCard extends AppCompatActivity {
                     alertBuilder.setTitle("Confirmar Compra");
                     alertBuilder.setMessage("Número de Tarjeta: " + cardForm.getCardNumber() + "\n" +
                             "Fecha de expiración: " + cardForm.getExpirationDateEditText().getText().toString() + "\n" +
-                            "CVV: " + cardForm.getCvv() + "\n" );
+                            "CVV: " + cardForm.getCvv() + "\n" +
+                            "Total: "+ payment);
                     alertBuilder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {

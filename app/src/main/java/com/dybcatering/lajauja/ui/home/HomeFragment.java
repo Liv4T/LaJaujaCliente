@@ -121,9 +121,9 @@ public class HomeFragment extends Fragment {
 
         recyclerView_menu = root.findViewById(R.id.recycler_menu);
         recyclerView_menu.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(recyclerView_menu.getContext(),
-                R.anim.layout_fall_down);
-        recyclerView_menu.setLayoutAnimation(controller);
+    //    LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(recyclerView_menu.getContext(),
+      //          R.anim.layout_fall_down);
+     //   recyclerView_menu.setLayoutAnimation(controller);
 
         setupSlider();
 

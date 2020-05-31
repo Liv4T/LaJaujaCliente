@@ -64,7 +64,7 @@ public class Cart extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference requests;
 
-    public TextView txtTotalPrice;
+    public TextView txtTotalPrice, totalenvio, totalmasenvio;
     FButton btnPlace;
 
     List<Order> cart = new ArrayList<>();
@@ -93,6 +93,8 @@ public class Cart extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         txtTotalPrice = findViewById(R.id.total);
+        totalenvio = findViewById(R.id.totalenvio);
+        totalmasenvio = findViewById(R.id.totalmasenvio);
 
 
         btnPlace = findViewById(R.id.btnPlaceOrder);
@@ -116,13 +118,17 @@ public class Cart extends AppCompatActivity {
                 int precio = 6000;
                 int total = 0;
 
+///tortilla blanda de harina
 
                 if (totalint < 15000){
                     Toast.makeText(Cart.this, "No es posible realizar una compra inferior a $15.000", Toast.LENGTH_SHORT).show();
                 }else if(totalint <60000){
                     total = precio +totalint;
                     String valor = String.valueOf(total);
-                    txtTotalPrice.setText("$"+valor);
+                    int totalmasenv = total;
+                    totalenvio.setText("$6.000");
+                    totalmasenvio.setText("$"+totalmasenv);
+
                     Toast.makeText(Cart.this, "Se agrega un precio adicional de $6.000 por costos de envío cuando el total es inferior a $60.0000", Toast.LENGTH_SHORT).show();
                     if (Common.currentUser.getName().equals("")){
                         iniciarRegistroFinal();
