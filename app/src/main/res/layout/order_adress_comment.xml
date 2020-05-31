@@ -44,13 +44,18 @@
                 android:layout_height="wrap_content"
                 android:text="Método de pago" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tarjeta de Crédito"/>
+
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/epayco" />
 
-            <TextView
+            <!--TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hora de Entrega" />
@@ -70,7 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="14:00 a 18:00" />
-            </RadioGroup>
+            </RadioGroup-->
 
             <TextView
                 android:id="@+id/textView2"
@@ -81,7 +86,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/domicilios5"
+                android:background="@drawable/domicilios7"
                 android:layout_gravity="center_horizontal"/>
             
         </LinearLayout>

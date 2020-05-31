@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -119,11 +120,11 @@ public class Cart extends AppCompatActivity {
                 int total = 0;
 
 ///tortilla blanda de harina
-
-                if (totalint < 15000){
+                total = precio +totalint;
+                if (total < 15000){
                     Toast.makeText(Cart.this, "No es posible realizar una compra inferior a $15.000", Toast.LENGTH_SHORT).show();
-                }else if(totalint <60000){
-                    total = precio +totalint;
+                }else if(total <60000){
+
                     String valor = String.valueOf(total);
                     int totalmasenv = total;
                     totalenvio.setText("$6.000");
@@ -171,9 +172,10 @@ public class Cart extends AppCompatActivity {
        // final RadioButton rdCrediBanco = order_address_comment.findViewById(R.id.rdiPagoCrediBanco);
        // final RadioButton rdCOD = order_address_comment.findViewById(R.id.rdiPagoContraEntrega);
 
-        final RadioButton rdHora1 = order_address_comment.findViewById(R.id.rdiHoraEntregaUno);
-        final RadioButton rdHora2 = order_address_comment.findViewById(R.id.rdiHoraEntregaDos);
+      //  final RadioButton rdHora1 = order_address_comment.findViewById(R.id.rdiHoraEntregaUno);
+   //     final RadioButton rdHora2 = order_address_comment.findViewById(R.id.rdiHoraEntregaDos);
 
+        edtAdress.setText(Common.currentUser.getMyDirection());
 
         alertDialog.setView(order_address_comment);
         alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
@@ -182,71 +184,20 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                edtAdress.setText(Common.currentUser.getMyDirection());
 
                 address = edtAdress.getText().toString();
                 comment = edtComment.getText().toString();
 
+                /*
                 if (!rdHora1.isChecked() && !rdHora2.isChecked()){
                     Toast.makeText(Cart.this, "Por Favor Seleccione una Hora de Entrega", Toast.LENGTH_SHORT).show();
                     return;
                 }else if (rdHora1.isChecked()){
 
-
-
-                    String totalconvertido = String.valueOf(total);
-
-/*
-                    PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmmount),
-                            "USD",
-                            "Orden La Jauja ",
-                            PayPalPayment.PAYMENT_INTENT_SALE);
-                    Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);
-                    intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-                    intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
-                    startActivityForResult(intent, PAYPAL_REQUEST_CODE);
-                     */
-
-                    Intent checkoutcard = new Intent(Cart.this, CheckOutCard.class);
-                    checkoutcard.putExtra("address", address);
-                    checkoutcard.putExtra("payment", totalconvertido);
-                    checkoutcard.putExtra("status", "0");
-                    checkoutcard.putExtra("comment", comment);
-                    checkoutcard.putExtra("paymentState", "8:00 a 14:00");
-                    startActivity(checkoutcard);
-
-
-
-                    String latlng = "";
-/*
-                    Request request = new Request(
-                            Common.currentUser.getPhone(),
-                            Common.currentUser.getName(),
-                            address,
-                            txtTotalPrice.getText().toString(),
-                            "0",
-                            comment,
-                            "Pago Con Datáfono",
-                            "8:00 a 14:00",
-                            latlng,
-                            //falta agregar lat y long desde la peticion
-                            cart
-                    );
-                    String order_number = String.valueOf(System.currentTimeMillis());
-                    requests.child(order_number)
-                            .setValue(request);
-
-                    new Database(getBaseContext()).cleanCart();
-                    sendNotification(order_number);
-
-                    Toast.makeText(Cart.this, "Gracias, la orden ha sido recibida", Toast.LENGTH_SHORT).show();
-                    finish();
- */
-
-
-
-
-                }else if ( rdHora2.isChecked()){
+                 */
+                if (TextUtils.isEmpty(address) || TextUtils.isEmpty(comment)){
+                    Toast.makeText(Cart.this, "No olvides completar todos los campos", Toast.LENGTH_SHORT).show();
+                }else{
                     String formatAmmount = txtTotalPrice.getText().toString()
                             .replace("$", "")
                             .replace(",", "")
@@ -263,30 +214,23 @@ public class Cart extends AppCompatActivity {
 
                     String totalconvertido = String.valueOf(total);
 
-/*
-                    PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmmount),
-                            "USD",
-                            "Orden La Jauja ",
-                            PayPalPayment.PAYMENT_INTENT_SALE);
-                    Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);
-                    intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-                    intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
-                    startActivityForResult(intent, PAYPAL_REQUEST_CODE);
-                     */
-
                     Intent checkoutcard = new Intent(Cart.this, CheckOutCard.class);
                     checkoutcard.putExtra("address", address);
                     checkoutcard.putExtra("payment", totalconvertido);
                     checkoutcard.putExtra("status", "0");
                     checkoutcard.putExtra("comment", comment);
-                    checkoutcard.putExtra("paymentState", "14:00 a 18:00");
+                    checkoutcard.putExtra("paymentState", "Aceptado");
                     startActivity(checkoutcard);
 
 
 
                     String latlng = "";
 
+
+
+
                 }
+
 
 
 

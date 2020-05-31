@@ -178,8 +178,8 @@ public class GalleryFragment extends Fragment {
         // final RadioButton rdCrediBanco = order_address_comment.findViewById(R.id.rdiPagoCrediBanco);
         // final RadioButton rdCOD = order_address_comment.findViewById(R.id.rdiPagoContraEntrega);
 
-        final RadioButton rdHora1 = order_address_comment.findViewById(R.id.rdiHoraEntregaUno);
-        final RadioButton rdHora2 = order_address_comment.findViewById(R.id.rdiHoraEntregaDos);
+      //  final RadioButton rdHora1 = order_address_comment.findViewById(R.id.rdiHoraEntregaUno);
+      //  final RadioButton rdHora2 = order_address_comment.findViewById(R.id.rdiHoraEntregaDos);
 
 
         alertDialog.setView(order_address_comment);
@@ -194,37 +194,8 @@ public class GalleryFragment extends Fragment {
                 address = edtAdress.getText().toString();
                 comment = edtComment.getText().toString();
 
-                if (!rdHora1.isChecked() && !rdHora2.isChecked()){
-                    Toast.makeText(getContext(), "Por Favor Seleccione una Hora de Entrega", Toast.LENGTH_SHORT).show();
-                    return;
-                }else if (rdHora1.isChecked()){
 
 
-
-                    String totalconvertido = String.valueOf(total);
-
-/*
-                    PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmmount),
-                            "USD",
-                            "Orden La Jauja ",
-                            PayPalPayment.PAYMENT_INTENT_SALE);
-                    Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);
-                    intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-                    intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
-                    startActivityForResult(intent, PAYPAL_REQUEST_CODE);
-                     */
-
-                    Intent checkoutcard = new Intent(getContext(), CheckOutCard.class);
-                    checkoutcard.putExtra("address", address);
-                    checkoutcard.putExtra("payment", totalconvertido);
-                    checkoutcard.putExtra("status", "0");
-                    checkoutcard.putExtra("comment", comment);
-                    checkoutcard.putExtra("paymentState", "8:00 a 14:00");
-                    startActivity(checkoutcard);
-
-
-
-                    String latlng = "";
 /*
                     Request request = new Request(
                             Common.currentUser.getPhone(),
@@ -248,29 +219,17 @@ public class GalleryFragment extends Fragment {
 
                     Toast.makeText(Cart.this, "Gracias, la orden ha sido recibida", Toast.LENGTH_SHORT).show();
                     finish();
- */
+
+                                    if (!rdHora1.isChecked() && !rdHora2.isChecked()){
+                    Toast.makeText(getContext(), "Por Favor Seleccione una Hora de Entrega", Toast.LENGTH_SHORT).show();
+                    return;
+                }else if (rdHora1.isChecked()){
 
 
-
-
-                }else if ( rdHora2.isChecked()){
-                    String formatAmmount = txtTotalPrice.getText().toString()
-                            .replace("$", "")
-                            .replace(",", "")
-                            .replace(".00", "");
-
-                    int validacion = Integer.parseInt(formatAmmount);
-
-                    int total = 0;
-                    if (validacion <= 60000){
-                        total  = validacion + 6000;
-                    }else{
-                        total = validacion;
-                    }
 
                     String totalconvertido = String.valueOf(total);
 
-/*
+
                     PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmmount),
                             "USD",
                             "Orden La Jauja ",
@@ -279,22 +238,67 @@ public class GalleryFragment extends Fragment {
                     intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
                     intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
                     startActivityForResult(intent, PAYPAL_REQUEST_CODE);
-                     */
-
-                    Intent checkoutcard = new Intent(getContext(), CheckOutCard.class);
-                    checkoutcard.putExtra("address", address);
-                    checkoutcard.putExtra("payment", totalconvertido);
-                    checkoutcard.putExtra("status", "0");
-                    checkoutcard.putExtra("comment", comment);
-                    checkoutcard.putExtra("paymentState", "14:00 a 18:00");
-                    startActivity(checkoutcard);
 
 
+                Intent checkoutcard = new Intent(getContext(), CheckOutCard.class);
+                checkoutcard.putExtra("address", address);
+                checkoutcard.putExtra("payment", totalconvertido);
+                checkoutcard.putExtra("status", "0");
+                checkoutcard.putExtra("comment", comment);
+                checkoutcard.putExtra("paymentState", "8:00 a 14:00");
+                startActivity(checkoutcard);
 
-                    String latlng = "";
 
+
+                String latlng = "";
+
+
+
+
+            }else if ( rdHora2.isChecked()){
+                String formatAmmount = txtTotalPrice.getText().toString()
+                        .replace("$", "")
+                        .replace(",", "")
+                        .replace(".00", "");
+
+                int validacion = Integer.parseInt(formatAmmount);
+
+                int total = 0;
+                if (validacion <= 60000){
+                    total  = validacion + 6000;
+                }else{
+                    total = validacion;
                 }
 
+                String totalconvertido = String.valueOf(total);
+
+
+                    PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmmount),
+                            "USD",
+                            "Orden La Jauja ",
+                            PayPalPayment.PAYMENT_INTENT_SALE);
+                    Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);
+                    intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+                    intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
+                    startActivityForResult(intent, PAYPAL_REQUEST_CODE);
+
+
+                Intent checkoutcard = new Intent(getContext(), CheckOutCard.class);
+                checkoutcard.putExtra("address", address);
+                checkoutcard.putExtra("payment", totalconvertido);
+                checkoutcard.putExtra("status", "0");
+                checkoutcard.putExtra("comment", comment);
+                checkoutcard.putExtra("paymentState", "14:00 a 18:00");
+                startActivity(checkoutcard);
+
+
+
+                String latlng = "";
+
+            }
+
+
+                    */
 
 
 
