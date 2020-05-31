@@ -9,12 +9,14 @@ public class Order {
     private String Discount;
     private String Image;
     private String Accomp;
+    private String Accomp2;
+    private String Accomp3;
 
     public Order() {
     }
 
 
-    public Order( String productId, String productName, String quantity, String price, String discount, String image, String accomp) {
+    public Order( String productId, String productName, String quantity, String price, String discount, String image, String accomp, String accomp2, String accomp3) {
 
         ProductId = productId;
         ProductName = productName;
@@ -23,9 +25,11 @@ public class Order {
         Discount = discount;
         Image = image;
         Accomp = accomp;
+        Accomp2 = accomp2;
+        Accomp3 = accomp3;
     }
 
-    public Order(int ID, String productId, String productName, String quantity, String price, String discount, String image, String accomp) {
+    public Order(int ID, String productId, String productName, String quantity, String price, String discount, String image, String accomp, String accomp2, String accomp3) {
         this.ID = ID;
         ProductId = productId;
         ProductName = productName;
@@ -34,6 +38,8 @@ public class Order {
         Discount = discount;
         Image = image;
         Accomp = accomp;
+        Accomp2 = accomp2;
+        Accomp3 = accomp3;
 
     }
 
@@ -99,5 +105,21 @@ public class Order {
 
     public void setAccomp(String accomp) {
         Accomp = accomp;
+    }
+
+    public String getAccomp2() {
+        return Accomp2;
+    }
+
+    public void setAccomp2(String accomp2) {
+        Accomp2 = accomp2;
+    }
+
+    public String getAccomp3() {
+        return Accomp3;
+    }
+
+    public void setAccomp3(String accomp3) {
+        Accomp3 = accomp3;
     }
 }

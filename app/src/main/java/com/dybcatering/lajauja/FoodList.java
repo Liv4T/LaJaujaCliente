@@ -375,7 +375,9 @@ public class FoodList extends AppCompatActivity {
                             totalString,
                             discount,
                             image,
-                            "Papas Chips"
+                            "Papas Chips",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -395,7 +397,9 @@ public class FoodList extends AppCompatActivity {
                             totalString,
                             discount,
                             image,
-                            "Platanitos Chips"
+                            "Platanitos Chips",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -414,7 +418,9 @@ public class FoodList extends AppCompatActivity {
                             totalString,
                             discount,
                             image,
-                            "Arracacha Chips"
+                            "Arracacha Chips",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -433,7 +439,9 @@ public class FoodList extends AppCompatActivity {
                             totalString,
                             discount,
                             image,
-                            "Arroz Integral"
+                            "Arroz Integral",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -452,7 +460,9 @@ public class FoodList extends AppCompatActivity {
                             totalString,
                             discount,
                             image,
-                            "Arroz Blanco"
+                            "Arroz Blanco",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -466,7 +476,9 @@ public class FoodList extends AppCompatActivity {
                             price,
                             discount,
                             image,
-                            "Sin Acompañamiento"
+                            "Sin Acompañamiento",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -521,7 +533,9 @@ public class FoodList extends AppCompatActivity {
                             totalString,
                             discount,
                             image,
-                            "Papas Chips"
+                            "Papas Chips",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -540,7 +554,9 @@ public class FoodList extends AppCompatActivity {
                             totalString,
                             discount,
                             image,
-                            "Platanitos Chips"
+                            "Platanitos Chips",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -559,7 +575,9 @@ public class FoodList extends AppCompatActivity {
                             totalString,
                             discount,
                             image,
-                            "Arracacha Chips"
+                            "Arracacha Chips",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -578,7 +596,9 @@ public class FoodList extends AppCompatActivity {
                             totalString,
                             discount,
                             image,
-                            "Arroz Integral"
+                            "Arroz Integral",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -597,7 +617,9 @@ public class FoodList extends AppCompatActivity {
                             totalString,
                             discount,
                             image,
-                            "Arroz Blanco"
+                            "Arroz Blanco",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -611,7 +633,9 @@ public class FoodList extends AppCompatActivity {
                             price,
                             discount,
                             image,
-                            "Sin Acompañamiento"
+                            "Sin Acompañamiento",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -657,7 +681,9 @@ public class FoodList extends AppCompatActivity {
                             price,
                             discount,
                             image,
-                            "Boloñesa 250gr"
+                            "Boloñesa 250gr",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -671,7 +697,9 @@ public class FoodList extends AppCompatActivity {
                             price,
                             discount,
                             image,
-                            "Carbonara 250gr"
+                            "Carbonara 250gr",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -685,7 +713,9 @@ public class FoodList extends AppCompatActivity {
                             price,
                             discount,
                             image,
-                            "Napolitana 250gr"
+                            "Napolitana 250gr",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -699,7 +729,9 @@ public class FoodList extends AppCompatActivity {
                             price,
                             discount,
                             image,
-                            "Verduras 250gr"
+                            "Verduras 250gr",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -713,7 +745,9 @@ public class FoodList extends AppCompatActivity {
                             price,
                             discount,
                             image,
-                            "Pesto 250gr"
+                            "Pesto 250gr",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -734,7 +768,9 @@ public class FoodList extends AppCompatActivity {
                 price,
                 discount,
                 image,
-                "Sin Acompañamiento"
+                "Sin Acompañamiento",
+                "",
+                ""
 
         ));
         Toast.makeText(FoodList.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
