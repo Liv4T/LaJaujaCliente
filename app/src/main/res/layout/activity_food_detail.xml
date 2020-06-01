@@ -188,6 +188,202 @@
 
             </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Acompañamiento 1 (Opcional)" />
+
+                    <RadioGroup
+                        android:id="@+id/radiogroup1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/radiopapas1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Papas Chips (+$3,000)" />
+
+                        <RadioButton
+                            android:id="@+id/radioplatanitos1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Platanitos Chips (+$3,000)" />
+
+                        <RadioButton
+                            android:id="@+id/radioarracacha1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Arracacha Chips(+$3,000)" />
+
+                        <RadioButton
+                            android:id="@+id/radioarrozblanco1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Arroz Blanco (+$2,500)" />
+
+                        <RadioButton
+                            android:id="@+id/radioarrozintegral1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Arroz Integral ($3,000)" />
+
+                        <RadioButton
+                            android:id="@+id/radiosinacompa1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sin Acompañamiento"
+                            />
+
+
+                    </RadioGroup>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Acompañamiento 2 (Opcional)" />
+
+                    <RadioGroup
+                        android:id="@+id/radiogroup2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/radiopapas2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Papas Chips (+$3,000)" />
+
+                        <RadioButton
+                            android:id="@+id/radioplatanitos2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Platanitos Chips (+$3,000)" />
+
+                        <RadioButton
+                            android:id="@+id/radioarracacha2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Arracacha Chips(+$3,000)" />
+
+                        <RadioButton
+                            android:id="@+id/radioarrozblanco2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Arroz Blanco (+$2,500)" />
+
+                        <RadioButton
+                            android:id="@+id/radioarrozintegral2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Arroz Integral ($3,000)" />
+
+                        <RadioButton
+                            android:id="@+id/radiosinacompa2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sin Acompañamiento"
+                            />
+
+
+                    </RadioGroup>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Acompañamiento 3 (Opcional)" />
+
+                    <RadioGroup
+                        android:id="@+id/radiogroup3"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/radiopapas3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Papas Chips (+$3,000)" />
+
+                        <RadioButton
+                            android:id="@+id/radioplatanitos3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Platanitos Chips (+$3,000)" />
+
+                        <RadioButton
+                            android:id="@+id/radioarracacha3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Arracacha Chips(+$3,000)" />
+
+                        <RadioButton
+                            android:id="@+id/radioarrozblanco3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Arroz Blanco (+$2,500)" />
+
+                        <RadioButton
+                            android:id="@+id/radioarrozintegral3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Arroz Integral ($3,000)" />
+
+                        <RadioButton
+                            android:id="@+id/radiosinacompa3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sin Acompañamiento"
+                            />
+
+
+                    </RadioGroup>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
             <info.hoang8f.widget.FButton
                 android:id="@+id/btnOpenCart"
                 android:layout_width="match_parent"

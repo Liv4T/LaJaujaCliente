@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +64,10 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
     FButton showComment, btnOpenCart;
 
     Food currentFood;
+
+    RadioButton papaschips1, papaschips2, papaschips3, platanitoschips1, platanitoschips2, platanitoschips3, arracachachips1, arracachachips2, arracachachips3, arrozblanco1, arrozblanco2, arrozblanco3, arrozintegral1, arrozintegral2, arrozintegral3, sinacomp1, sinacomp2, sinacomp3;
+
+    RadioGroup radio1, radio2, radio3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +83,38 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         ratingBar = findViewById(R.id.ratingBar);
         showComment = findViewById(R.id.btnShowComments);
 
+        radio1 = findViewById(R.id.radiogroup1);
+        radio2 = findViewById(R.id.radiogroup2);
+        radio3 = findViewById(R.id.radiogroup3);
+
+
+        final int radioId = radio1.getCheckedRadioButtonId();
+        final int radioId2 = radio2.getCheckedRadioButtonId();
+        final int radioId3 = radio3.getCheckedRadioButtonId();
+
+
+        papaschips1 = findViewById(R.id.radiopapas1);
+        platanitoschips1 = findViewById(R.id.radioplatanitos1);
+        arrozblanco1 = findViewById(R.id.radioarrozblanco1);
+        arrozintegral1 = findViewById(R.id.radioarrozintegral1);
+        sinacomp1 = findViewById(R.id.radiosinacompa1);
+
+
+
+        papaschips2 = findViewById(R.id.radiopapas2);
+        platanitoschips2 = findViewById(R.id.radioplatanitos2);
+        arrozblanco2 = findViewById(R.id.radioarrozblanco2);
+        arrozintegral2 = findViewById(R.id.radioarrozintegral2);
+        sinacomp2 = findViewById(R.id.radiosinacompa2);
+
+        papaschips3 = findViewById(R.id.radiopapas3);
+        platanitoschips3 = findViewById(R.id.radioplatanitos3);
+        arrozblanco3 = findViewById(R.id.radioarrozblanco3);
+        arrozintegral3 = findViewById(R.id.radioarrozintegral3);
+        sinacomp3 = findViewById(R.id.radiosinacompa3);
+
+
+
         btnRating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +127,2734 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         btnOpenCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+               /*
+               papaschips1 = findViewById(radioId);
+                platanitoschips1 = findViewById(radioId);
+                arrozblanco1 = findViewById(radioId);
+                arrozintegral1 = findViewById(radioId);
+                sinacomp1 = findViewById(radioId);
+
+                papaschips2 = findViewById(radioId2);
+                platanitoschips2 = findViewById(radioId2);
+                arrozblanco2 = findViewById(radioId2);
+                arrozintegral2 = findViewById(radioId2);
+                sinacomp2 = findViewById(radioId2);
+
+                papaschips3 = findViewById(radioId3);
+                platanitoschips3 = findViewById(radioId3);
+                arrozblanco3 = findViewById(radioId3);
+                arrozintegral3 = findViewById(radioId3);
+                sinacomp3 = findViewById(radioId3);
+                */
+
+
+                if (papaschips1.isChecked() && papaschips2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Papas Chips",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+
+                }else if (papaschips1.isChecked() && papaschips2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Papas Chips",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+
+                }else if (papaschips1.isChecked() && papaschips2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Papas Chips",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+
+                }else if (papaschips1.isChecked() && papaschips2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Papas Chips",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && papaschips2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Papas Chips",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && papaschips2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Papas Chips",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && platanitoschips2.isChecked() && papaschips1.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Platanitos Chips",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && platanitoschips2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Platanitos Chips",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && platanitoschips2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Platanitos Chips",
+                            "Arracha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && platanitoschips2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Platanitos Chips",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && platanitoschips2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Platanitos Chips",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && platanitoschips2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Platanitos Chips",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arracachachips2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arracha Chips",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arracachachips2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arracha Chips",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arracachachips2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arracha Chips",
+                            "Arracha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arracachachips2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arracha Chips",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arracachachips2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arracha Chips",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arracachachips2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arracha Chips",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arrozblanco2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arroz Blanco",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arrozblanco2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arroz Blanco",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arrozblanco2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arroz Blanco",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arrozblanco2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arroz Blanco",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arrozblanco2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arroz Blanco",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arrozblanco2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arroz Blanco",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arrozintegral2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arroz Integral",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arrozintegral2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arroz Integral",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arrozintegral2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arroz Integral",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arrozintegral2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arroz Integral",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arrozintegral2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arroz Integral",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && arrozintegral2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 6000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Arroz Integral",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && sinacomp2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 6000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Sin Acompañamiento",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && sinacomp2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 6000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Sin Acompañamiento",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && sinacomp2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 6000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Sin Acompañamiento",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && sinacomp2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 5500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Sin Acompañamiento",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && sinacomp2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 6000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Sin Acompañamiento",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (papaschips1.isChecked() && sinacomp2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 3000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Papas Chips",
+                            "Sin Acompañamiento",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && papaschips2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Papas Chips",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && papaschips2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Papas Chips",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && papaschips2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Papas Chips",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && papaschips2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Papas Chips",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && papaschips2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Papas Chips",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && papaschips2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 6000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Papas Chips",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && platanitoschips2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Platanitos Chips",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && platanitoschips2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Platanitos Chips",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && platanitoschips2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Platanitos Chips",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && platanitoschips2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Platanitos Chips",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && platanitoschips2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 6000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Platanitos Chips",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arracachachips2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arracacha Chips",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arracachachips2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arracacha Chips",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arracachachips2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arracacha Chips",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arracachachips2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arracacha Chips",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arracachachips2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arracacha Chips",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arracachachips2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 6000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arracacha Chips",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arrozblanco2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arroz Blanco",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arrozblanco2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arroz Blanco",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arrozblanco2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arroz Blanco",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arrozblanco2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arroz Blanco",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arrozblanco2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arroz Blanco",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arrozblanco2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 5500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arroz Blanco",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arrozintegral2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arroz Integral",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arrozintegral2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arroz Integral",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arrozintegral2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arroz Integral",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arrozintegral2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arroz Integral",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arrozintegral2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arroz Integral",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && arrozintegral2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 6000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Arroz Integral",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && sinacomp2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 6000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Sin Acompañamiento",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && sinacomp2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 6000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Sin Acompañamiento",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && sinacomp2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 6000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Sin Acompañamiento",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && sinacomp2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 5500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Sin Acompañamiento",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && sinacomp2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 6000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Sin Acompañamiento",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (platanitoschips1.isChecked() && sinacomp2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 3000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Platanitos Chips",
+                            "Sin Acompañamiento",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && papaschips2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Papas Chips",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && papaschips2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Papas Chips",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && papaschips2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Papas Chips",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && papaschips2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Papas Chips",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && papaschips2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Papas Chips",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && papaschips2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 6000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Papas Chips",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && platanitoschips2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Platanitos Chips",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && platanitoschips2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Platanitos Chips",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && platanitoschips2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Platanitos Chips",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && platanitoschips2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Platanitos Chips",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && platanitoschips2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Platanitos Chips",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && platanitoschips2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 6000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Platanitos Chips",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && arracachachips2.isChecked() &&papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Arracacha Chips",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && arracachachips2.isChecked() &&platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Arracacha Chips",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && arracachachips2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Arracacha Chips",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && arracachachips2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Arracacha Chips",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && arracachachips2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Arracacha Chips",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arracachachips1.isChecked() && arracachachips2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 6000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arracacha Chips",
+                            "Arracacha Chips",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && papaschips2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Papas Chips",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && papaschips2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Papas Chips",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && papaschips2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Papas Chips",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && papaschips2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Papas Chips",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && papaschips2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Papas Chips",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && papaschips2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 5500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Papas Chips",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && platanitoschips2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Platanitos Chips",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && platanitoschips2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Platanitos Chips",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && platanitoschips2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Platanitos Chips",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && platanitoschips2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Platanitos Chips",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && platanitoschips2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Platanitos Chips",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && platanitoschips2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 5500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Platanitos Chips",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arracachachips2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arracacha Chips",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arracachachips2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arracacha Chips",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arracachachips2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arracacha Chips",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arracachachips2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arracacha Chips",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arracachachips2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arracacha Chips",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arracachachips2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arracacha Chips",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arracachachips2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 5500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arracacha Chips",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arrozblanco2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arroz Blanco",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arrozblanco2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arroz Blanco",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arrozblanco2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arroz Blanco",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arrozblanco2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 7500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arroz Blanco",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arrozblanco2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arroz Blanco",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arrozblanco2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 5000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arroz Blanco",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arrozintegral2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arroz Integral",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arrozintegral2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arroz Integral",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arrozintegral2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arroz Integral",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arrozintegral2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arroz Integral",
+                            "Arroz Blanco"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arrozintegral2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arroz Integral",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && arrozintegral2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 5500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Arroz Integral",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && sinacomp2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 5500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Sin Acompañamiento",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && sinacomp2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 5500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Sin Acompañamiento",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && sinacomp2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 5500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Sin Acompañamiento",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && sinacomp2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 5000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Sin Acompañamiento",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && sinacomp2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 5500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Sin Acompañamiento",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozblanco1.isChecked() && sinacomp2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 2500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Blanco",
+                            "Sin Acompañamiento",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozintegral1.isChecked() && papaschips2.isChecked() && papaschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Integral",
+                            "Papas Chips",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozintegral1.isChecked() && papaschips2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Integral",
+                            "Papas Chips",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozintegral1.isChecked() && papaschips2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Integral",
+                            "Papas Chips",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozintegral1.isChecked() && papaschips2.isChecked() && arrozblanco3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 8500;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Integral",
+                            "Papas Chips",
+                            "Arracacha Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozintegral1.isChecked() && papaschips2.isChecked() && arrozintegral3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Integral",
+                            "Papas Chips",
+                            "Arroz Integral"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozintegral1.isChecked() && papaschips2.isChecked() && sinacomp3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 6000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Integral",
+                            "Papas Chips",
+                            "Sin Acompañamiento"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozintegral1.isChecked() && platanitoschips2.isChecked() && papaschips1.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Integral",
+                            "Platanitos Chips",
+                            "Papas Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozintegral1.isChecked() && platanitoschips2.isChecked() && platanitoschips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Integral",
+                            "Platanitos Chips",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }else if (arrozintegral1.isChecked() && platanitoschips2.isChecked() && arracachachips3.isChecked()){
+
+                    String precioActual = currentFood.getPrice();
+                    int foo = Integer.parseInt(precioActual);
+                    int total = foo + 9000;
+                    String totalString = Integer.toString(total);
+
+                    new Database(getBaseContext()).addToCart(new Order(
+                            foodId,
+                            currentFood.getFood(),
+                            numberButton.getNumber(),
+                            totalString,
+                            currentFood.getDiscount(),
+                            currentFood.getImage(),
+                            "Arroz Integral",
+                            "Platanitos Chips",
+                            "Platanitos Chips"
+                    ));
+                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
+
+                }
+
+                /*
                 switch (currentFood.getMenuId()){
 
                     case "02":
@@ -115,6 +2880,8 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
 
 
                 }
+                 */
+
 
 /*
                 new Database(getBaseContext()).addToCart(new Order(
@@ -180,7 +2947,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 currentFood.getPrice(),
                 currentFood.getDiscount(),
                 currentFood.getImage(),
-                "Sin Acompañamiento"
+                "Sin Acompañamiento",
+                "",
+                ""
 
         ));
         Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -224,7 +2993,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                             totalString,
                             currentFood.getDiscount(),
                             currentFood.getImage(),
-                            "Papas Chips"
+                            "Papas Chips",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -243,7 +3014,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                             totalString,
                             currentFood.getDiscount(),
                             currentFood.getImage(),
-                            "Platanitos Chips"
+                            "Platanitos Chips",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -262,7 +3035,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                             totalString,
                             currentFood.getDiscount(),
                             currentFood.getImage(),
-                            "Arracacha Chips"
+                            "Arracacha Chips",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -281,7 +3056,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                             totalString,
                             currentFood.getDiscount(),
                             currentFood.getImage(),
-                            "Arroz Integral"
+                            "Arroz Integral",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -300,7 +3077,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                            totalString,
                            currentFood.getDiscount(),
                            currentFood.getImage(),
-                           "Arroz Blanco"
+                           "Arroz Blanco",
+                           "",
+                           ""
 
                    ));
                    Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -353,7 +3132,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                             totalString,
                             currentFood.getDiscount(),
                             currentFood.getImage(),
-                            "Papas Chips"
+                            "Papas Chips",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -372,7 +3153,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                             totalString,
                             currentFood.getDiscount(),
                             currentFood.getImage(),
-                            "Platanitos Chips"
+                            "Platanitos Chips",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -391,7 +3174,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                             totalString,
                             currentFood.getDiscount(),
                             currentFood.getImage(),
-                            "Arracacha Chips"
+                            "Arracacha Chips",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -410,7 +3195,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                             totalString,
                             currentFood.getDiscount(),
                             currentFood.getImage(),
-                            "Arroz Integral"
+                            "Arroz Integral",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -429,7 +3216,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                             totalString,
                             currentFood.getDiscount(),
                             currentFood.getImage(),
-                            "Arroz Blanco"
+                            "Arroz Blanco",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -475,7 +3264,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                             currentFood.getPrice(),
                             currentFood.getDiscount(),
                             currentFood.getImage(),
-                            "Boloñesa 250gr"
+                            "Boloñesa 250gr",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -488,7 +3279,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                             currentFood.getPrice(),
                             currentFood.getDiscount(),
                             currentFood.getImage(),
-                            "Carbonara 250gr"
+                            "Carbonara 250gr",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -501,7 +3294,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                             currentFood.getPrice(),
                             currentFood.getDiscount(),
                             currentFood.getImage(),
-                            "Napolitana 250gr"
+                            "Napolitana 250gr",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -514,7 +3309,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                             currentFood.getPrice(),
                             currentFood.getDiscount(),
                             currentFood.getImage(),
-                            "Verduras 250gr"
+                            "Verduras 250gr",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
@@ -527,7 +3324,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                             currentFood.getPrice(),
                             currentFood.getDiscount(),
                             currentFood.getImage(),
-                            "Pesto 250gr"
+                            "Pesto 250gr",
+                            "",
+                            ""
 
                     ));
                     Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
