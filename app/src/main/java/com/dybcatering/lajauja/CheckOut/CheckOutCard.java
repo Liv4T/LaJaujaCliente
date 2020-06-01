@@ -129,10 +129,10 @@ public class CheckOutCard extends AppCompatActivity {
 
                             Authentication auth = new Authentication();
 
-                            auth.setApiKey("09a20cdc0bb914e3fc296b66a9384edb");
-                            auth.setPrivateKey("47456095b252b6dd13a8fe07dc5099c1");
+                            auth.setApiKey("7ee0476d220ff9fbabc7cbe8e7efd6ed");
+                            auth.setPrivateKey("f4b5126d8ba50f45c669e2dfa61db6e5");
                             auth.setLang("ES");
-                            auth.setTest(true);
+                            auth.setTest(false);
 
                             final Epayco epayco = new Epayco(auth);
 
@@ -187,8 +187,8 @@ public class CheckOutCard extends AppCompatActivity {
 
         Authentication auth = new Authentication();
 
-        auth.setApiKey("09a20cdc0bb914e3fc296b66a9384edb");
-        auth.setPrivateKey("47456095b252b6dd13a8fe07dc5099c1");
+        auth.setApiKey("7ee0476d220ff9fbabc7cbe8e7efd6ed");
+        auth.setPrivateKey("f4b5126d8ba50f45c669e2dfa61db6e5");
         auth.setLang("ES");
         auth.setTest(true);
 
@@ -220,8 +220,8 @@ public class CheckOutCard extends AppCompatActivity {
 
         Authentication auth = new Authentication();
 
-        auth.setApiKey("09a20cdc0bb914e3fc296b66a9384edb");
-        auth.setPrivateKey("47456095b252b6dd13a8fe07dc5099c1");
+        auth.setApiKey("7ee0476d220ff9fbabc7cbe8e7efd6ed");
+        auth.setPrivateKey("f4b5126d8ba50f45c669e2dfa61db6e5");
         auth.setLang("ES");
         auth.setTest(true);
 
