@@ -189,10 +189,12 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                app:cardElevation="5dp"
-                app:cardUseCompatPadding="true"
+                android:id="@+id/card1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -244,8 +246,8 @@
                             android:id="@+id/radiosinacompa1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Sin Acompañamiento"
-                            />
+                            android:checked="true"
+                            android:text="Sin Acompañamiento" />
 
 
                     </RadioGroup>
@@ -254,6 +256,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card2"
                 app:cardElevation="5dp"
                 app:cardUseCompatPadding="true"
                 android:layout_width="match_parent"
@@ -309,6 +312,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Sin Acompañamiento"
+                            android:checked="true"
                             />
 
 
@@ -318,6 +322,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card3"
                 app:cardElevation="5dp"
                 app:cardUseCompatPadding="true"
                 android:layout_width="match_parent"
@@ -374,6 +379,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Sin Acompañamiento"
+                            android:checked="true"
                             />
 
 
@@ -382,6 +388,61 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Selecciona un Acompañamiento" />
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/radiobolonesa"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Boloñesa (250gr)" />
+
+                        <RadioButton
+                            android:id="@+id/radiocarbonara"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Carbonara (250gr)" />
+
+                        <RadioButton
+                            android:id="@+id/radionapolitana"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Napolitana (250gr)" />
+
+                        <RadioButton
+                            android:id="@+id/radioverduras"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Verduras (250gr)" />
+
+                        <RadioButton
+                            android:id="@+id/radiopesto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Pesto (250gr)" />
+
+
+                    </RadioGroup>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
 
             <info.hoang8f.widget.FButton
