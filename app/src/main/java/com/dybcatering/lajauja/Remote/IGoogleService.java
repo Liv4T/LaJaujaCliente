@@ -10,9 +10,9 @@ public interface IGoogleService {
     Call<String> getAddressName(@Url String url);
 
     @GET
-    Call<String> getLocationFromAddress(@Url String url, @Query("key") String key);
+    Call<String> getLocationFromAddress(@Url String url);
 
     @GET("maps/api/directions/json")
-    Call<String> getDirections(@Query("origin") String origin, @Query("destination") String destination, @Query("key") String key);
+    Call<String> getDirections(@Query("origin") String origin, @Query("destination") String destination);
 
 }

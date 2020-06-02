@@ -59,7 +59,7 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
 
     Polyline polyline;
 
-    public String key = "AIzaSyDSppWPTs40BHl1R6WCOkdECz5w91ie1NU";
+  //  public String key = "AIzaSyDSppWPTs40BHl1R6WCOkdECz5w91ie1NU";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +111,7 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
                         if (currentOrder.getAddress() != null && !currentOrder.getAddress().isEmpty()){
 
                             mService.getLocationFromAddress(new StringBuilder("https://maps.googleapis.com/maps/api/geocode/json?address=")
-                            .append(currentOrder.getAddress()).toString(), key)
+                            .append(currentOrder.getAddress()).toString())
 
 
                                     .enqueue(new Callback<String>() {
@@ -174,7 +174,7 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
                                                                 if (polyline != null)
                                                                         polyline.remove();
                                                                 mService.getDirections(shipperLocation.latitude+","+shipperLocation.longitude,
-                                                                        currentOrder.getLatLng(), key)
+                                                                        currentOrder.getLatLng())
                                                                         .enqueue(new Callback<String>() {
                                                                             @Override
                                                                             public void onResponse(Call<String> call, Response<String> response) {
@@ -211,7 +211,7 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
 
                         }else if (currentOrder.getLatLng() != null && !currentOrder.getLatLng().isEmpty()){
                             mService.getLocationFromAddress(new StringBuilder("https://maps.googleapis.com/maps/api/geocode/json?latlng=")
-                                    .append(currentOrder.getLatLng()).toString(), key)
+                                    .append(currentOrder.getLatLng()).toString())
                                     .enqueue(new Callback<String>() {
                                         @Override
                                         public void onResponse(Call<String> call, Response<String> response) {
@@ -272,7 +272,7 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
                                                                 if (polyline != null)
                                                                     polyline.remove();
                                                                 mService.getDirections(shipperLocation.latitude+","+shipperLocation.longitude,
-                                                                        currentOrder.getAddress(), key)
+                                                                        currentOrder.getAddress())
                                                                         .enqueue(new Callback<String>() {
                                                                             @Override
                                                                             public void onResponse(Call<String> call, Response<String> response) {
