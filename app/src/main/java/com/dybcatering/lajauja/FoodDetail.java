@@ -161,6 +161,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 }
 
 
+                btnCart.setCount(new Database(getBaseContext()).getCountCart());
 
 /*
                 new Database(getBaseContext()).addToCart(new Order(
@@ -224,7 +225,6 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
 
             ));
             Toast.makeText(FoodDetail.this, "Agregado Al Carrito de Compras ", Toast.LENGTH_SHORT).show();
-
         }else if (radiocarbonara.isChecked()){
             new Database(getBaseContext()).addToCart(new Order(
                     foodId,

@@ -131,7 +131,7 @@ public class Cart extends AppCompatActivity {
                     totalmasenvio.setText("$"+totalmasenv);
 
                     Toast.makeText(Cart.this, "Se agrega un precio adicional de $6.000 por costos de envío cuando el total es inferior a $60.0000", Toast.LENGTH_SHORT).show();
-                    if (Common.currentUser.getName().equals("")){
+                    if (Common.currentUser.getName().isEmpty() || Common.currentUser.getName().equals("")){
                         iniciarRegistroFinal();
                     }else{
                         showAlertDialog(total);
@@ -305,7 +305,17 @@ public class Cart extends AppCompatActivity {
         Locale locale = new Locale("en", "US");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
 
+        int envio = 0;
+        if (total<= 60000){
+            envio = 6000;
+            totalenvio.setText("$6.000");
+        }else{
+            envio = 0;
+            totalenvio.setText("$0");
+        }
+
         txtTotalPrice.setText(fmt.format(total));
+        totalmasenvio.setText(fmt.format(total+envio));
     }
 
     @Override

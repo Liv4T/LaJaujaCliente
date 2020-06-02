@@ -16,7 +16,7 @@ public class Order {
     }
 
 
-    public Order( String productId, String productName, String quantity, String price, String discount, String image, String accomp, String accomp2, String accomp3) {
+    public Order(String productId, String productName, String quantity, String price, String discount, String image, String accomp, String accomp2, String accomp3) {
 
         ProductId = productId;
         ProductName = productName;
@@ -28,7 +28,6 @@ public class Order {
         Accomp2 = accomp2;
         Accomp3 = accomp3;
     }
-
     public Order(int ID, String productId, String productName, String quantity, String price, String discount, String image, String accomp, String accomp2, String accomp3) {
         this.ID = ID;
         ProductId = productId;
@@ -42,6 +41,8 @@ public class Order {
         Accomp3 = accomp3;
 
     }
+
+
 
     public int getID() {
         return ID;
