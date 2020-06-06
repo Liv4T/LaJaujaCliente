@@ -190,7 +190,7 @@ public class CheckOutCard extends AppCompatActivity {
         auth.setApiKey("7ee0476d220ff9fbabc7cbe8e7efd6ed");
         auth.setPrivateKey("f4b5126d8ba50f45c669e2dfa61db6e5");
         auth.setLang("ES");
-        auth.setTest(true);
+        auth.setTest(false);
 
         final Epayco epayco = new Epayco(auth);
 
@@ -223,7 +223,7 @@ public class CheckOutCard extends AppCompatActivity {
         auth.setApiKey("7ee0476d220ff9fbabc7cbe8e7efd6ed");
         auth.setPrivateKey("f4b5126d8ba50f45c669e2dfa61db6e5");
         auth.setLang("ES");
-        auth.setTest(true);
+        auth.setTest(false);
 
         final Epayco epayco = new Epayco(auth);
 
@@ -285,7 +285,7 @@ public class CheckOutCard extends AppCompatActivity {
                         "0",
                         comment,
                         "Tarjeta",
-                        "8:00 a 14:00",
+                        "Pagado",
                         "",
                         //falta agregar lat y long desde la peticion
                         cart

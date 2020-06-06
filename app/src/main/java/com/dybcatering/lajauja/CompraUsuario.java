@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dybcatering.lajauja.Common.Common;
@@ -24,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.rey.material.widget.CheckBox;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -38,7 +42,11 @@ public class CompraUsuario extends AppCompatActivity {
     Button btnSignUp, btnSelectDate;
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-    
+
+
+    CheckBox ckbRemember;
+
+    TextView txtTerminosCondiciones;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +64,19 @@ public class CompraUsuario extends AppCompatActivity {
          edtDocument = findViewById(R.id.edtDocument);
          btnSignUp = findViewById(R.id.btnSignUp);
 
+        ckbRemember = findViewById(R.id.chkRemember);
+
         btnSelectDate = findViewById(R.id.btnSelectDate);
+
+        txtTerminosCondiciones = findViewById(R.id.txtTerminosCondiciones);
+
+        txtTerminosCondiciones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://lajauja.com/terminosycondiciones/")));
+
+            }
+        });
 
         btnSelectDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,32 +111,39 @@ public class CompraUsuario extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                final ProgressDialog mDialog = new ProgressDialog(CompraUsuario.this);
-                mDialog.setMessage("Por favor espere un momento");
-                mDialog.show();
 
-                Map<String, Object> personaMap = new HashMap<>();
-                personaMap.put("name", edtName.getText().toString());
-                personaMap.put("lastName", edtLastName.getText().toString());
-                personaMap.put("date", edtDate.getText().toString());
-                personaMap.put("document", edtDocument.getText().toString());
-                personaMap.put("email", edtEmail.getText().toString());
-                personaMap.put("password", edtPassword.getText().toString());
+                if (ckbRemember.isChecked()) {
 
-                table_user.updateChildren(personaMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(CompraUsuario.this, "Registrado satisfactoriamente", Toast.LENGTH_SHORT).show();
-                        Common.currentUser.setName(edtName.getText().toString());
-                        finish();
-                    }
-                })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(CompraUsuario.this, "algo fallo", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                    final ProgressDialog mDialog = new ProgressDialog(CompraUsuario.this);
+                    mDialog.setMessage("Por favor espere un momento");
+                    mDialog.show();
+
+                    Map<String, Object> personaMap = new HashMap<>();
+                    personaMap.put("name", edtName.getText().toString());
+                    personaMap.put("lastName", edtLastName.getText().toString());
+                    personaMap.put("date", edtDate.getText().toString());
+                    personaMap.put("document", edtDocument.getText().toString());
+                    personaMap.put("email", edtEmail.getText().toString());
+                    personaMap.put("password", edtPassword.getText().toString());
+
+                    table_user.updateChildren(personaMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(CompraUsuario.this, "Registrado satisfactoriamente", Toast.LENGTH_SHORT).show();
+                            Common.currentUser.setName(edtName.getText().toString());
+                            finish();
+                        }
+                    })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(CompraUsuario.this, "algo fallo en el registro", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }else{
+                    Toast.makeText(CompraUsuario.this, "No olvides aceptar nuestros términos y condiciones", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

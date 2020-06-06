@@ -178,7 +178,25 @@
                 app:met_singleLineEllipsis="true" />
 
 
+            <com.rey.material.widget.CheckBox
+                android:id="@+id/chkRemember"
+                style="@style/Material.Drawable.CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Acepto Términos y Condiciones"
+                android:textColor="@android:color/white"
+                android:textSize="23sp"
+                app:cbd_strokeColor="@android:color/white"
+                app:cbd_tickColor="@color/colorPrimaryDark" />
 
+            <TextView
+                android:id="@+id/txtTerminosCondiciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ver Términos y Condiciones"
+                android:textColor="#fff"
+                android:textSize="20sp" />
 
             <info.hoang8f.widget.FButton
                 android:id="@+id/btnSignUp"
