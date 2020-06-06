@@ -267,15 +267,22 @@ public class FoodList extends AppCompatActivity {
                         case "-M6aF2b92oplFbm9CP6K":
                         case "-M6aTJuBmOi17CV9HazM":
                         case "-M6aTTHKqecVewwNmwSK":
+                        case "03":
+
+                        case "04":
+                        case "05":
                             showAlertSopas(food.getPrice(), adapter.getRef(i).getKey(), food.getFood(), food.getDiscount(), food.getImage());
                             break;
-                        case "03":
+                            /*
+                                                    case "03":
                             showAlertArroces(food.getPrice(), adapter.getRef(i).getKey(), food.getFood(), food.getDiscount(), food.getImage());
                             break;
                         case "04":
                         case "05":
                             showAlertPastas(food.getPrice(), adapter.getRef(i).getKey(), food.getFood(), food.getDiscount(), food.getImage());
                             break;
+                             */
+
                         case "06":
                         case "-M6aTY_nXWgK574gCgCt":
 

@@ -144,12 +144,14 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                     case "-M6aTJuBmOi17CV9HazM":
                     case "-M6aTTHKqecVewwNmwSK":
                     case "03":
-                        AlertNormal();
-                        break;
                     case "04":
                     case "05":
-                        AlertPastas2();
+                      //      papaschips1.setChecked(true);
+                        AlertNormal();
                         break;
+
+                //        AlertPastas2();
+                        //break;
                     case "06":
                     case "-M6aTY_nXWgK574gCgCt":
 
@@ -200,6 +202,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 startActivity(intent);
             }
         });
+
 
 
     }
@@ -291,8 +294,10 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
     }
 
     private void AlertNormal() {
+
         papaschips1 = findViewById(R.id.radiopapas1);
         platanitoschips1 = findViewById(R.id.radioplatanitos1);
+        arracachachips1 = findViewById(R.id.radioarracacha1);
         arrozblanco1 = findViewById(R.id.radioarrozblanco1);
         arrozintegral1 = findViewById(R.id.radioarrozintegral1);
         sinacomp1 = findViewById(R.id.radiosinacompa1);
@@ -301,6 +306,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         papaschips2 = findViewById(R.id.radiopapas2);
         platanitoschips2 = findViewById(R.id.radioplatanitos2);
         arrozblanco2 = findViewById(R.id.radioarrozblanco2);
+        arracachachips2 = findViewById(R.id.radioarracacha2);
         arrozintegral2 = findViewById(R.id.radioarrozintegral2);
         sinacomp2 = findViewById(R.id.radiosinacompa2);
 
@@ -309,6 +315,13 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         arrozblanco3 = findViewById(R.id.radioarrozblanco3);
         arrozintegral3 = findViewById(R.id.radioarrozintegral3);
         sinacomp3 = findViewById(R.id.radiosinacompa3);
+        arracachachips3 = findViewById(R.id.radioarracacha3);
+
+
+
+
+
+
         if (sinacomp1.isChecked() && sinacomp2.isChecked() && sinacomp3.isChecked()){
 
 
@@ -4439,6 +4452,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                     case "-M6aTTHKqecVewwNmwSK":
                     case "03":
 
+                    case "04":
+                    case "05":
+
                         card1.setVisibility(View.VISIBLE);
                         card2.setVisibility(View.VISIBLE);
                         card3.setVisibility(View.VISIBLE);
@@ -4446,7 +4462,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
 
                         break;
 
+                  /*
                     case "04":
+
                     case "05":
                         card1.setVisibility(View.GONE);
                         card2.setVisibility(View.GONE);
@@ -4455,7 +4473,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
 
                         // showAlertPastas();
                         break;
-
+*/
                     case "06":
                     case "-M6aTY_nXWgK574gCgCt":
 
